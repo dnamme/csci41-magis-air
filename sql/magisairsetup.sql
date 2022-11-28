@@ -52,13 +52,12 @@ CREATE TABLE AIRPORT_ROUTE(
     routeid INT NOT NULL,
     PRIMARY KEY(airportid,routeid),
     FOREIGN KEY(routeid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT,
-    FOREIGN KEY(airportid) REFERENCES AIRPORT(airportid) ON DELETE RESTRICT,
+    FOREIGN KEY(airportid) REFERENCES AIRPORT(airportid) ON DELETE RESTRICT
 );
 
 CREATE TABLE IROUTE(
     irouteid INT NOT NULL,
     noofstopovers int,
-    CONSTRAINT chk_ft CHECK (flighttype IN ('direct', 'indirect')),
     PRIMARY KEY (irouteid),
     FOREIGN KEY (irouteid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT
 );
@@ -157,7 +156,7 @@ CREATE TABLE FLIGHT_TRAVELHIST(
     flightid INT NOT NULL,
     travelhistoryid INT NOT NULL,
     PRIMARY KEY (flightid, travelhistoryid),
-    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT
+    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT,
     FOREIGN KEY (travelhistoryid) REFERENCES TRAVELHISTORY(travelhistoryid) ON DELETE RESTRICT
 );
 
@@ -166,7 +165,7 @@ CREATE TABLE CREW_ASSIGNMENT(
     crewid INT NOT NULL,
     dateassigned DATE NOT NULL DEFAULT '1970-01-01',
     PRIMARY KEY (flightid, crewid, dateassigned),
-    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT
+    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT,
     FOREIGN KEY (crewid) REFERENCES CREW(crewid) ON DELETE RESTRICT
 );
 
@@ -174,7 +173,7 @@ CREATE TABLE FLIGHT_FBOOKING(
     flightid INT NOT NULL,
     bookingno INT NOT NULL,
     PRIMARY KEY (flightid, bookingno),
-    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT
+    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT,
     FOREIGN KEY (bookingno) REFERENCES FLIGHTBOOKING(bookingno) ON DELETE RESTRICT
 );
 
@@ -182,6 +181,6 @@ CREATE TABLE ITEM_FBOOKING(
     itemid INT NOT NULL,
     bookingno INT NOT NULL,
     PRIMARY KEY(itemid, bookingno),
-    FOREIGN KEY (itemid) REFERENCES ADDITIONALITEM(itemid) ON DELETE RESTRICT
+    FOREIGN KEY (itemid) REFERENCES ADDITIONALITEM(itemid) ON DELETE RESTRICT,
     FOREIGN KEY (bookingno) REFERENCES FLIGHTBOOKING(bookingno) ON DELETE RESTRICT
 );
