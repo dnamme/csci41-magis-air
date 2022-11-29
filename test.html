@@ -7,27 +7,45 @@
     <title>Document</title>
 
     <script>
-      function test() {
-        fetch("localhost:3001/test", {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          credentials: "same-origin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: JSON.stringify({
-            category: "Cooking",
-          }),
-        }).then((res) => {
-          console.log(res);
-        });
+      function status(res) {
+        if (res.status >= 200 && res.status < 300) return Promise.resolve(res);
+        else return Promise.reject(new Error(res.statusText));
       }
 
-      test();
+      function test() {
+        // let url = "https://theguidon.com/1112/main/wp-json/wp/v2/posts";
+        // let url = "http://jservice.io/api/categories";
+        // let url = "http://localhost:3001/api/test";
+        let url = "http://localhost:3001/api/a";
+        // fetch(url, {
+        //   method: "GET",
+        //   mode: "no-cors",
+        //   cache: "no-cache",
+        //   credentials: "same-origin",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   redirect: "follow",
+        //   referrerPolicy: "no-referrer",
+        // })
+        //   .then(status)
+        //   .then((res) => res.json())
+        //   .then((data) => console.log(data))
+        //   .catch((err) => console.log(err));
+
+        fetch(url, {
+          method: "POST",
+        })
+          .then(status)
+          .then((res) => res.json())
+          .then((data) => console.log(data))
+          .catch((err) => console.log(err));
+      }
     </script>
   </head>
-  <body></body>
+  <body>
+    <script>
+      test();
+    </script>
+  </body>
 </html>
