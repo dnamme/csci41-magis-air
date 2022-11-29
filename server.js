@@ -46,20 +46,51 @@ app.get("/api/html", (req, res) => {
     res.send(result);
   });
 });
-
-app.post("/api/a", (req, res) => {
-  // res.render("test2", { key: "hi" });
-  // res.sendFile(path.join(__dirname, "./test2.html"));
-
-  res.send(
-    JSON.stringify({
-      message: "good!",
-    })
-  );
-});
 // end of sample code
 
+const sampmsg = { message: "ok" };
+
+/**
+ * Pages
+ */
+app.get("/", (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, "./pages/index.html"));
+});
+
+app.get("/flights", (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, "./pages/flights.html"));
+});
+
+app.get("/routes", (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, "./pages/routes.html"));
+});
+
+/**
+ * API
+ */
+app.get("/api/upcoming-flights", (req, res) => {
+  res.status(200).setHeader("content-type", "application/json").send(sampmsg);
+});
+
+app.get("/api/flights/:year/:month/:day", (req, res) => {
+  res.status(200).setHeader("content-type", "application/json").send({
+    year: req.params.year,
+    month: req.params.month,
+    day: req.params.day,
+  });
+});
+
+app.get("/api/flight/:id", (req, res) => {
+  res.status(200).setHeader("content-type", "application/json").send({
+    id: req.params.id,
+  });
+});
+
+/**
+ * Running the app
+ */
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+  console.log(`Open via the link: http://localhost:${port}`);
 });

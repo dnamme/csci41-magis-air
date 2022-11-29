@@ -18,5 +18,5 @@ Kyla Sydney L. Martin
 
 1. Open Windows Terminal
 2. Run `npm i` to make sure that all required dependencies are downloaded
-3. Run `npm run server` to start the API
-4. Open the HTML files
+3. Run `npm run server` to start the app
+4. Open the link shown in the terminal
