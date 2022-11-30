@@ -56,7 +56,7 @@ CREATE TABLE AIRPORT_ROUTE(
 
 CREATE TABLE IROUTE(
     irouteid INT NOT NULL,
-    noofstopovers int,
+    noofstopovers INT,
     PRIMARY KEY (irouteid),
     FOREIGN KEY (irouteid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT
 );
@@ -115,13 +115,10 @@ CREATE TABLE FLIGHT(
     flightid INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     routeid INT,
     deptime TIME,
-    deptime TIME,
+    arrivetime TIME,
     duration TIME,
     cost FLOAT,
-    origin VARCHAR(255),
-    destination VARCHAR(255),
-    FOREIGN KEY (origin) REFERENCES ROUTE(origin) ON DELETE RESTRICT,
-    FOREIGN KEY (destination) REFERENCES ROUTE(destination) ON DELETE RESTRICT
+    FOREIGN KEY (routeid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT
 );
 
 CREATE TABLE CREW(
