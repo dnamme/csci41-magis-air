@@ -42,7 +42,6 @@ CREATE TABLE ROUTE(
     routeid INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     origin VARCHAR(255),
     destination VARCHAR(255),
-    duration TIME,
     flighttype VARCHAR(20),
     CONSTRAINT chk_ft CHECK (flighttype IN ('direct', 'indirect'))
 );
@@ -114,11 +113,15 @@ CREATE TABLE ADDITIONALITEM(
 
 CREATE TABLE FLIGHT(
     flightid INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    depdate DATETIME,
-    arrivedate DATETIME,
+    routeid INT,
+    deptime TIME,
+    deptime TIME,
     duration TIME,
-    cityid INT,
-    FOREIGN KEY (cityid) REFERENCES CITY(cityid) ON DELETE RESTRICT
+    cost FLOAT,
+    origin VARCHAR(255),
+    destination VARCHAR(255),
+    FOREIGN KEY (origin) REFERENCES ROUTE(origin) ON DELETE RESTRICT,
+    FOREIGN KEY (destination) REFERENCES ROUTE(destination) ON DELETE RESTRICT
 );
 
 CREATE TABLE CREW(
