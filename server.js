@@ -68,20 +68,76 @@ app.get("/routes", (req, res) => {
 /**
  * API
  */
-app.get("/api/upcoming-flights", (req, res) => {
-  res.status(200).setHeader("content-type", "application/json").send(sampmsg);
+function set_json(res) {
+  res.status(200).setHeader("content-type", "application/json");
+  return res;
+}
+
+function set_error(res, msg = "") {
+  res.status(400).setHeader("content-type", "application/json").send({
+    message: msg,
+  });
+  return res;
+}
+
+app.post("/api/message", (req, res) => {
+  if (!req.query.name || !req.query.email || !req.query.message) {
+    set_error(res, "No name, email, or message!");
+  } else {
+    set_json(res).send({
+      name: req.query.name,
+      email: req.query.email,
+      message: req.query.message,
+    });
+
+    console.log(`Message from ${req.query.name} (${req.query.email}):`);
+    console.log(req.query.message);
+  }
 });
 
-app.get("/api/flights/:year/:month/:day", (req, res) => {
-  res.status(200).setHeader("content-type", "application/json").send({
+app.get("/api/upcoming-flights", (req, res) => {
+  set_json(res).send(sampmsg);
+});
+
+app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
+  // mode = 0b01 = 1 = arrivals only
+  // mode = 0b10 = 2 = departures only
+  // mode = 0b11 = 3 = both departures and arrivals
+  set_json(res).send({
+    mode: req.params.mode,
+    from: req.params.from,
+    to: req.params.to,
     year: req.params.year,
     month: req.params.month,
     day: req.params.day,
   });
+
+  /*
+
+  SELECT ... FROM ... WHERE
+    (
+      ARRIVAL DATE IS IN RANGE OF DATE
+      CITY ID = :from // add if :from is not null
+    )
+    OR
+    (
+      DEPARTURE DATE IS IN RANGE OF DATE
+      CITY ID = :to // add if :to is not null
+    )
+
+  SELECT ... FROM ... WHERE
+    ()
+
+  SELECT ... FROM ... WHERE
+    ()
+    AND
+    ()
+
+  */
 });
 
 app.get("/api/flight/:id", (req, res) => {
-  res.status(200).setHeader("content-type", "application/json").send({
+  set_json(res).send({
     id: req.params.id,
   });
 });
