@@ -117,8 +117,11 @@ CREATE TABLE FLIGHT(
     depdate DATETIME,
     arrivedate DATETIME,
     duration TIME,
-    cityid INT,
-    FOREIGN KEY (cityid) REFERENCES CITY(cityid) ON DELETE RESTRICT
+    cost FLOAT,
+    originid INT,
+    destinationid INT,
+    FOREIGN KEY (originid) REFERENCES CITY(cityid) ON DELETE RESTRICT,
+    FOREIGN KEY (destinationid) REFERENCES CITY(cityid) ON DELETE RESTRICT
 );
 
 CREATE TABLE CREW(

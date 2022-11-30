@@ -1,0 +1,151 @@
+INSERT INTO 
+CITY(cityname, country)
+VALUES
+('Manila', 'Philippines'),
+('Singapore', 'Singapore'),
+('Beijing', 'China'),
+('Shanghai', 'China'),
+('Tokyo', 'Japan'),
+('Los Angeles', 'USA'),
+('New York', 'USA'),
+('London', 'UK');
+
+INSERT INTO
+AIRPORT(airportname, airportcapacity, noofterminals, cityid)
+VALUES
+('Ninoy Aquino International Airport', 250, 4, 1),
+('Changi Airport', 350, 4, 2),
+('Beijing Capirtal International Airport', 400, 3, 3),
+('Shanghai Pudong International Airport', 650, 3, 4),
+('Narita International Airport', 500, 3, 5),
+('Los Angeles International Airport', 500, 9, 6),
+('John F. Kennedy International Airport', 350, 8, 7),
+('Heathrow Airport', 500, 4, 8);
+
+INSERT INTO
+ROUTE(origin, destination, duration, flighttype)
+VALUES
+('Manila', 'Singapore', '3:45:00', 'direct'),
+('Singapore', 'Manila', '3:45:00', 'direct'),
+('Manila', 'Beijing', '4:40:00', 'direct'),
+('Beijing', 'Manila', '4:40:00', 'direct'),
+('Manila', 'Beijing', '7:10:00', 'indirect'),
+('Beijing', 'Manila', '7:10:00', 'indirect'),
+('Singapore', 'Beijing', '6:00:00', 'direct'),
+('Beijing', 'Singapore', '6:00:00', 'direct'),
+('Manila', 'Shanghai', '3:15:00', 'direct'),
+('Shanghai', 'Manila', '3:15:00', 'direct'),
+('Singapore', 'Shanghai', '5:05:00', 'direct'),
+('Shanghai', 'Singapore', '5:05:00', 'direct'),
+('Manila', 'Tokyo', '4:05:00', 'direct'),
+('Tokyo', 'Manila', '4:05:00', 'direct'),
+('Singapore', 'Tokyo', '6:30:00', 'direct'),
+('Tokyo', 'Singapore', '6:30:00', 'direct'),
+('Shanghai', 'Tokyo', '2:35:00', 'direct'),
+('Tokyo', 'Shanghai', '2:35:00', 'direct'),
+('Manila', 'Los Angeles', '12:40:00', 'direct'),
+('Los Angeles', 'Manila', '12:40:00', 'direct'),
+('Manila', 'Los Angeles', '17:10:00', 'indirect'),
+('Los Angeles', 'Manila', '17:10:00', 'indirect'),
+('Beijing', 'Los Angeles', '12:00:00', 'direct'),
+('Los Angeles', 'Beijing', '12:00:00', 'direct'),
+('Beijing', 'Los Angeles', '18:50:00', 'indirect'),
+('Los Angeles', 'Beijing', '18:50:00', 'indirect'),
+('Manila', 'New York', '15:45:00', 'direct'),
+('New York', 'Manila', '15:45:00', 'direct'),
+('Manila', 'New York', '22:25:00', 'indirect'),
+('New York', 'Manila', '22:25:00', 'indirect'),
+('Singapore', 'New York', '28:45:00', 'indirect'),
+('New York', 'Singapore', '28:45:00', 'indirect'),
+('Tokyo', 'New York', '12:45:00', 'direct'),
+('New York', 'Tokyo', '12:45:00', 'direct'),
+('Tokyo', 'New York', '21:20:00', 'indirect'),
+('New York', 'Tokyo', '21:20:00', 'indirect'),
+('Manila', 'London', '15:05:00', 'direct'),
+('London', 'Manila', '15:05:00', 'direct'),
+('Manila', 'London', '17:25:00', 'indirect'),
+('London', 'Manila', '17:25:00', 'indirect'),
+('Beijing', 'London', '11:15:00', 'direct'),
+('London', 'Beijing', '11:15:00', 'direct'),
+('Beijing', 'London', '14:40:00', 'indirect'),
+('London', 'Beijing', '14:40:00', 'indirect'),
+('Shanghai', 'London', '12:40:00', 'direct'),
+('London', 'Shanghai', '12:40:00', 'direct'),
+('Shanghai', 'London', '16:00:00', 'indirect'),
+('London', 'Shanghai', '16:00:00', 'indirect');
+
+INSERT INTO
+IROUTE(irouteid, noofstopovers)
+VALUES
+(5, 1),
+(6, 1),
+(21, 1),
+(22, 1),
+(25, 1),
+(26, 1),
+(29, 1),
+(30, 1),
+(31, 2),
+(32, 2),
+(39, 1),
+(40, 1),
+(43, 2),
+(44, 2),
+(47, 1),
+(48, 1);
+
+INSERT INTO
+FLIGHT(depdate, arrivedate, duration, cost, originid, destinationid)
+VALUES
+('2025-12-21 20:25:00', '2025-12-21 23:55:00', '3:30:00', 265, 1, 2),
+('2025-12-21 00:45:00', '2025-12-21 4:00:00', '3:15:00', 265, 2, 1),
+('2025-12-21 11:05:00', '2025-12-21 14:35:00', '3:30:00', 265, 1, 2),
+('2025-12-21 15:30:00', '2025-12-21 18:45:00', '3:15:00', 265, 2, 1),
+('2025-12-21 4:15:00', '2025-12-21 8:55:00', '4:40:00', 435, 1, 3),
+('2025-12-21 10:05:00', '2025-12-21 14:45:00', '4:40:00', 435, 3, 1),
+('2025-12-21 15:55:00', '2025-12-21 20:35:00', '4:40:00', 435, 1, 3),
+('2025-12-21 21:35:00', '2025-12-22 2:15:00', '4:40:00', 435, 3, 1),
+('2025-12-21 6:30:00', '2025-12-21 12:30:00', '6:00:00', 450, 2, 3),
+('2025-12-21 13:40:00', '2025-12-21 19:40:00', '6:00:00', 450, 3, 2),
+('2025-12-21 20:50:00', '2025-12-22 2:50:00', '6:00:00', 450, 2, 3),
+('2025-12-22 4:00:00', '2025-12-22 10:00:00', '6:00:00', 450, 3, 2),
+('2025-12-21 2:15:00', '2025-12-21 5:30:00', '3:15:00', 480, 1, 4),
+('2025-12-21 6:45:00', '2025-12-21 10:00:00', '3:15:00', 480, 4, 1),
+('2025-12-21 11:15:00', '2025-12-21 14:30:00', '3:15:00', 480, 1, 4),
+('2025-12-21 15:45:00', '2025-12-21 19:00:00', '3:15:00', 480, 4, 1),
+('2025-12-21 9:40:00', '2025-12-21 14:45:00', '5:05:00', 570, 2, 4),
+('2025-12-21 15:50:00', '2025-12-21 19:55:00', '5:05:00', 570, 4, 2),
+('2025-12-21 7:15:00', '2025-12-21 11:10:00', '4:05:00', 300, 1, 5),
+('2025-12-21 12:15:00', '2025-12-21 16:20:00', '4:05:00', 300, 1, 5),
+('2025-12-21 15:30:00', '2025-12-21 18:05:00', '2:35:00', 475, 4, 5),
+('2025-12-21 2:45:00', '2025-12-21 15:25:00', '12:40:00', 575, 1, 6),
+('2025-12-21 6:30:00', '2025-12-21 22:15:00', '15:45:00', 500, 7, 1),
+('2025-12-21 18:00:00', '2025-12-22 11:25:00', '17:25:00', 475, 8, 1);
+
+INSERT INTO 
+DAYSCHEDULE(date, flightid)
+VALUES
+('2025-12-21', 1),
+('2025-12-21', 2),
+('2025-12-21', 3),
+('2025-12-21', 4),
+('2025-12-21', 5),
+('2025-12-21', 6),
+('2025-12-21', 7),
+('2025-12-21', 8),
+('2025-12-21', 9),
+('2025-12-21', 10),
+('2025-12-21', 11),
+('2025-12-21', 12),
+('2025-12-21', 13),
+('2025-12-21', 14),
+('2025-12-21', 15),
+('2025-12-21', 16),
+('2025-12-21', 17),
+('2025-12-21', 18),
+('2025-12-21', 19),
+('2025-12-21', 20),
+('2025-12-21', 21),
+('2025-12-21', 22),
+('2025-12-21', 23),
+('2025-12-21', 24);
