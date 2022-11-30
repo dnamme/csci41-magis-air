@@ -68,15 +68,42 @@ app.get("/routes", (req, res) => {
 /**
  * API
  */
+function set_json(res) {
+  res.status(200).setHeader("content-type", "application/json");
+  return res;
+}
+
+function set_error(res, msg = "") {
+  res.status(400).setHeader("content-type", "application/json").send({
+    message: msg,
+  });
+  return res;
+}
+
+app.post("/api/message", (req, res) => {
+  if (!req.query.name || !req.query.email || !req.query.message) {
+    set_error(res, "No name, email, or message!");
+  } else {
+    set_json(res).send({
+      name: req.query.name,
+      email: req.query.email,
+      message: req.query.message,
+    });
+
+    console.log(`Message from ${req.query.name} (${req.query.email}):`);
+    console.log(req.query.message);
+  }
+});
+
 app.get("/api/upcoming-flights", (req, res) => {
-  res.status(200).setHeader("content-type", "application/json").send(sampmsg);
+  set_json(res).send(sampmsg);
 });
 
 app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
   // mode = 0b01 = 1 = arrivals only
   // mode = 0b10 = 2 = departures only
   // mode = 0b11 = 3 = both departures and arrivals
-  res.status(200).setHeader("content-type", "application/json").send({
+  set_json(res).send({
     mode: req.params.mode,
     from: req.params.from,
     to: req.params.to,
@@ -110,7 +137,7 @@ app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
 });
 
 app.get("/api/flight/:id", (req, res) => {
-  res.status(200).setHeader("content-type", "application/json").send({
+  set_json(res).send({
     id: req.params.id,
   });
 });
