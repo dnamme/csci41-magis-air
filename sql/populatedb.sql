@@ -23,56 +23,56 @@ VALUES
 ('Heathrow Airport', 500, 4, 8);
 
 INSERT INTO
-ROUTE(origin, destination, duration, flighttype)
+ROUTE(origin, destination, flighttype)
 VALUES
-('Manila', 'Singapore', '3:45:00', 'direct'),
-('Singapore', 'Manila', '3:45:00', 'direct'),
-('Manila', 'Beijing', '4:40:00', 'direct'),
-('Beijing', 'Manila', '4:40:00', 'direct'),
-('Manila', 'Beijing', '7:10:00', 'indirect'),
-('Beijing', 'Manila', '7:10:00', 'indirect'),
-('Singapore', 'Beijing', '6:00:00', 'direct'),
-('Beijing', 'Singapore', '6:00:00', 'direct'),
-('Manila', 'Shanghai', '3:15:00', 'direct'),
-('Shanghai', 'Manila', '3:15:00', 'direct'),
-('Singapore', 'Shanghai', '5:05:00', 'direct'),
-('Shanghai', 'Singapore', '5:05:00', 'direct'),
-('Manila', 'Tokyo', '4:05:00', 'direct'),
-('Tokyo', 'Manila', '4:05:00', 'direct'),
-('Singapore', 'Tokyo', '6:30:00', 'direct'),
-('Tokyo', 'Singapore', '6:30:00', 'direct'),
-('Shanghai', 'Tokyo', '2:35:00', 'direct'),
-('Tokyo', 'Shanghai', '2:35:00', 'direct'),
-('Manila', 'Los Angeles', '12:40:00', 'direct'),
-('Los Angeles', 'Manila', '12:40:00', 'direct'),
-('Manila', 'Los Angeles', '17:10:00', 'indirect'),
-('Los Angeles', 'Manila', '17:10:00', 'indirect'),
-('Beijing', 'Los Angeles', '12:00:00', 'direct'),
-('Los Angeles', 'Beijing', '12:00:00', 'direct'),
-('Beijing', 'Los Angeles', '18:50:00', 'indirect'),
-('Los Angeles', 'Beijing', '18:50:00', 'indirect'),
-('Manila', 'New York', '15:45:00', 'direct'),
-('New York', 'Manila', '15:45:00', 'direct'),
-('Manila', 'New York', '22:25:00', 'indirect'),
-('New York', 'Manila', '22:25:00', 'indirect'),
-('Singapore', 'New York', '28:45:00', 'indirect'),
-('New York', 'Singapore', '28:45:00', 'indirect'),
-('Tokyo', 'New York', '12:45:00', 'direct'),
-('New York', 'Tokyo', '12:45:00', 'direct'),
-('Tokyo', 'New York', '21:20:00', 'indirect'),
-('New York', 'Tokyo', '21:20:00', 'indirect'),
-('Manila', 'London', '15:05:00', 'direct'),
-('London', 'Manila', '15:05:00', 'direct'),
-('Manila', 'London', '17:25:00', 'indirect'),
-('London', 'Manila', '17:25:00', 'indirect'),
-('Beijing', 'London', '11:15:00', 'direct'),
-('London', 'Beijing', '11:15:00', 'direct'),
-('Beijing', 'London', '14:40:00', 'indirect'),
-('London', 'Beijing', '14:40:00', 'indirect'),
-('Shanghai', 'London', '12:40:00', 'direct'),
-('London', 'Shanghai', '12:40:00', 'direct'),
-('Shanghai', 'London', '16:00:00', 'indirect'),
-('London', 'Shanghai', '16:00:00', 'indirect');
+('Manila', 'Singapore', 'direct'),  # 1
+('Singapore', 'Manila', 'direct'),  # 2
+('Manila', 'Beijing', 'direct'),  # 3
+('Beijing', 'Manila', 'direct'),  # 4
+('Manila', 'Beijing', 'indirect'),  # 5
+('Beijing', 'Manila', 'indirect'),  # 6
+('Singapore', 'Beijing', 'direct'),  # 7
+('Beijing', 'Singapore', 'direct'),  # 8
+('Manila', 'Shanghai', 'direct'),  # 9
+('Shanghai', 'Manila', 'direct'),  # 10
+('Singapore', 'Shanghai', 'direct'),  # 11
+('Shanghai', 'Singapore', 'direct'),  # 12
+('Manila', 'Tokyo', 'direct'),  # 13
+('Tokyo', 'Manila', 'direct'),  # 14
+('Singapore', 'Tokyo', 'direct'),  # 15
+('Tokyo', 'Singapore', 'direct'),  # 16
+('Shanghai', 'Tokyo', 'direct'),  # 17
+('Tokyo', 'Shanghai', 'direct'),  # 18
+('Manila', 'Los Angeles', 'direct'),  # 19
+('Los Angeles', 'Manila', 'direct'),  # 20
+('Manila', 'Los Angeles', 'indirect'),  # 21
+('Los Angeles', 'Manila',  'indirect'),  # 22
+('Beijing', 'Los Angeles', 'direct'),  # 23
+('Los Angeles', 'Beijing', 'direct'),  # 24
+('Beijing', 'Los Angeles', 'indirect'),  # 25
+('Los Angeles', 'Beijing', 'indirect'),  # 26
+('Manila', 'New York', 'direct'),  # 27
+('New York', 'Manila', 'direct'),  # 28
+('Manila', 'New York', 'indirect'),  # 29
+('New York', 'Manila', 'indirect'),  # 30
+('Singapore', 'New York', 'indirect'),  # 31
+('New York', 'Singapore', 'indirect'),  # 32
+('Tokyo', 'New York', 'direct'),  # 33
+('New York', 'Tokyo', 'direct'),  # 34
+('Tokyo', 'New York', 'indirect'),  # 35
+('New York', 'Tokyo', 'indirect'),  # 36
+('Manila', 'London', 'direct'),  # 37
+('London', 'Manila', 'direct'),  # 38
+('Manila', 'London', 'indirect'),  # 39
+('London', 'Manila', 'indirect'),  # 40
+('Beijing', 'London', 'direct'),  # 41
+('London', 'Beijing', 'direct'),  # 42
+('Beijing', 'London', 'indirect'),  # 43
+('London', 'Beijing', 'indirect'),  # 44
+('Shanghai', 'London', 'direct'),  # 45
+('London', 'Shanghai', 'direct'),  # 46
+('Shanghai', 'London', 'indirect'),  # 47
+('London', 'Shanghai', 'indirect');  # 48
 
 INSERT INTO
 IROUTE(irouteid, noofstopovers)
@@ -95,32 +95,32 @@ VALUES
 (48, 1);
 
 INSERT INTO
-FLIGHT(depdate, arrivedate, duration, cost, originid, destinationid)
+FLIGHT(deptime, arrivetime, duration, cost, routeid)
 VALUES
-('2025-12-21 20:25:00', '2025-12-21 23:55:00', '3:30:00', 265, 1, 2),
-('2025-12-21 00:45:00', '2025-12-21 4:00:00', '3:15:00', 265, 2, 1),
-('2025-12-21 4:15:00', '2025-12-21 8:55:00', '4:40:00', 435, 1, 3),
-('2025-12-21 10:05:00', '2025-12-21 14:45:00', '4:40:00', 435, 3, 1),
-('2025-12-21 6:30:00', '2025-12-21 12:30:00', '6:00:00', 450, 2, 3),
-('2025-12-21 13:40:00', '2025-12-21 19:40:00', '6:00:00', 450, 3, 2),
-('2025-12-21 9:40:00', '2025-12-21 14:45:00', '5:05:00', 570, 2, 4),
-('2025-12-21 15:50:00', '2025-12-21 19:55:00', '5:05:00', 570, 4, 2),
-('2025-12-21 15:30:00', '2025-12-21 18:05:00', '2:35:00', 475, 4, 5),
-('2025-12-21 2:45:00', '2025-12-21 15:25:00', '12:40:00', 575, 1, 6),
-('2025-12-21 6:30:00', '2025-12-21 22:15:00', '15:45:00', 500, 7, 1),
-('2025-12-22 11:05:00', '2025-12-22 14:35:00', '3:30:00', 265, 1, 2),
-('2025-12-22 15:30:00', '2025-12-22 18:45:00', '3:15:00', 265, 2, 1),
-('2025-12-22 15:55:00', '2025-12-22 20:35:00', '4:40:00', 435, 1, 3),
-('2025-12-22 21:35:00', '2025-12-23 2:15:00', '4:40:00', 435, 3, 1),
-('2025-12-22 2:15:00', '2025-12-22 5:30:00', '3:15:00', 480, 1, 4),
-('2025-12-22 6:45:00', '2025-12-22 10:00:00', '3:15:00', 480, 4, 1),
-('2025-12-22 18:00:00', '2025-12-23 11:25:00', '17:25:00', 475, 8, 1),
-('2025-12-23 4:00:00', '2025-12-23 10:00:00', '6:00:00', 450, 3, 2),
-('2025-12-23 20:50:00', '2025-12-24 2:50:00', '6:00:00', 450, 2, 3),
-('2025-12-23 11:15:00', '2025-12-23 14:30:00', '3:15:00', 480, 1, 4),
-('2025-12-23 15:45:00', '2025-12-23 19:00:00', '3:15:00', 480, 4, 1),
-('2025-12-23 7:15:00', '2025-12-23 11:10:00', '4:05:00', 300, 1, 5),
-('2025-12-23 12:15:00', '2025-12-23 16:20:00', '4:05:00', 300, 1, 5);
+('20:25:00', '23:55:00', '3:30:00', 265, 1),
+('00:45:00', '4:00:00', '3:15:00', 265, 2),
+('4:15:00', '8:55:00', '4:40:00', 435, 3),
+('10:05:00', '14:45:00', '4:40:00', 435, 4),
+('6:30:00', '12:30:00', '6:00:00', 450, 7),
+('13:40:00', '19:40:00', '6:00:00', 450, 8),
+('9:40:00', '14:45:00', '5:05:00', 570, 11),
+('15:50:00', '19:55:00', '5:05:00', 570, 12),
+('15:30:00', '18:05:00', '2:35:00', 475, 17),
+('2:45:00', '15:25:00', '12:40:00', 575, 21),
+('6:30:00', '22:15:00', '15:45:00', 500, 30),
+('11:05:00', '14:35:00', '3:30:00', 265, 1),
+('15:30:00', '18:45:00', '3:15:00', 265, 2),
+('15:55:00', '20:35:00', '4:40:00', 435, 3),
+('21:35:00', '2:15:00', '4:40:00', 435, 4),
+('2:15:00', '5:30:00', '3:15:00', 480, 9),
+('6:45:00', '10:00:00', '3:15:00', 480, 10),
+('18:00:00', '11:25:00', '17:25:00', 475, 40),
+('4:00:00', '10:00:00', '6:00:00', 450, 8),
+('20:50:00', '2:50:00', '6:00:00', 450, 7),
+('11:15:00', '14:30:00', '3:15:00', 480, 9),
+('15:45:00', '19:00:00', '3:15:00', 480, 10),
+('7:15:00', '11:10:00', '4:05:00', 300, 13),
+('12:15:00', '16:20:00', '4:05:00', 300, 13);
 
 INSERT INTO 
 DAYSCHEDULE(date, flightid)
