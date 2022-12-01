@@ -26,18 +26,18 @@ function start_location_animation() {
 window.onload = () => {
   start_location_animation();
 
-  fetch("./api/upcoming-flights")
-    .then(stat)
-    .then(json)
-    .then((data) => {
-      let parent = document.querySelector("#upcoming-flights #board-wrapper");
-      let loader = document.querySelector(
-        "#upcoming-flights #board-wrapper .lds-ring"
-      );
+  let keys = ["Departures", "Arrivals"];
 
-      let keys = ["Departures", "Arrivals"];
+  let parent = document.querySelector("#upcoming-flights #board-wrapper");
+  let loader = document.querySelector(
+    "#upcoming-flights #board-wrapper .lds-ring"
+  );
 
-      for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 2; i++) {
+    fetch(`./api/upcoming/${keys[i].toLowerCase()}`)
+      .then(stat)
+      .then(json)
+      .then((data) => {
         // add text
         let c_dept = document.createElement("div");
         c_dept.classList.add("board-wrapper");
@@ -51,38 +51,36 @@ window.onload = () => {
         let b_dept = document.createElement("div");
         b_dept.classList.add("board", "frosted");
 
-        for (let j = 0; j < data.departures.length; j++) {
-          let key = keys[i].toLowerCase();
-
+        for (let j = 0; j < data.length; j++) {
           let time = document.createElement("p");
           time.classList.add("time");
-          time.innerText = format_time(data[key][j].time);
+          time.innerText = `${format_date(
+            data[j].time,
+            "mmm dd, YYYY"
+          )} | ${format_time(data[j].time)}`;
 
           let dts = document.createElement("p");
           dts.classList.add("dts");
-          dts.innerText = `${data[key][j].city} - ${data[key][j].flight}`;
+          dts.innerText = `${data[j].city} - ${data[j].flight}`;
 
           b_dept.appendChild(time);
           b_dept.appendChild(dts);
 
-          if (j + 1 != data[key].length)
+          if (j + 1 != data.length)
             b_dept.appendChild(document.createElement("hr"));
         }
 
         c_dept.appendChild(b_dept);
 
         parent.insertBefore(c_dept, loader);
-      }
 
-      // add arrivals board
-      let b_arrv = document.createElement("div");
-      b_arrv.classList.add("board");
+        // add arrivals board
+        let b_arrv = document.createElement("div");
+        b_arrv.classList.add("board");
 
-      // remove loader
-      parent.removeChild(loader);
-      // loader.parentNode.removeChild(loader);
-
-      console.log(data);
-    })
-    .catch((err) => console.log(err));
+        // remove loader
+        if (i == 1) parent.removeChild(loader);
+      })
+      .catch((err) => console.log(err));
+  }
 };

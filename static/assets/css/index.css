@@ -78,6 +78,7 @@
 
 #upcoming-flights .board {
   padding: 20px 48px;
+  width: 380px;
 }
 
 #upcoming-flights .board-wrapper h2 {

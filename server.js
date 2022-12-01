@@ -22,9 +22,10 @@ const db = mysql.createConnection({
   user: "root",
   host: "localhost",
   password: "",
-  database: "booksdb",
+  database: "magisdb",
 });
 
+/*
 // this is all sample code
 app.get("/api/test", (req, res) => {
   db.query("SELECT * FROM book", [], (err, result) => {
@@ -53,6 +54,7 @@ app.get("/api/html", (req, res) => {
   });
 });
 // end of sample code
+*/
 
 const sampmsg = { message: "ok" };
 
@@ -74,6 +76,18 @@ function send_error(res, msg = "") {
 function send_file(res, dir) {
   res.status(200).sendFile(path.join(__dirname, dir));
   return res;
+}
+
+function format_date(raw, hr = null, min = null, sec = null) {
+  let dt = new Date(raw);
+
+  return `${dt.getFullYear()}-${(dt.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${dt.getDate().toString().padStart(2, "0")} ${
+    hr === null ? dt.getHours().toString().padStart(2, "0") : hr
+  }:${min === null ? dt.getMinutes().toString().padStart(2, "0") : min}:${
+    sec === null ? dt.getSeconds().toString().padStart(2, "0") : sec
+  }`;
 }
 
 /**
@@ -130,44 +144,48 @@ app.post("/api/message", (req, res) => {
   );
 });
 
-// todo
-app.get("/api/upcoming-flights", (req, res) => {
-  set_json(res).send({
-    departures: [
-      {
-        time: "2025-12-21 20:25:00",
-        city: "Los Angeles",
-        flight: "MA 800",
-      },
-      {
-        time: "2025-12-21 21:25:00",
-        city: "Los Angeles",
-        flight: "MA 801",
-      },
-      {
-        time: "2025-12-21 22:25:00",
-        city: "Los Angeles",
-        flight: "MA 802",
-      },
-    ],
-    arrivals: [
-      {
-        time: "2025-12-21 15:25:00",
-        city: "Los Angeles",
-        flight: "MA 803",
-      },
-      {
-        time: "2025-12-21 16:25:00",
-        city: "Los Angeles",
-        flight: "MA 804",
-      },
-      {
-        time: "2025-12-21 17:25:00",
-        city: "Los Angeles",
-        flight: "MA 805",
-      },
-    ],
-  });
+/*
+  getting three next flights
+
+  SELECT f.flightid, f.routeid, f.deptime, f.arrivetime, f.cost, r.origin, r.destination, r.flighttype
+  FROM flight f, route r
+  WHERE f.deptime >= "2022-12-02 02:30:57"
+  AND f.routeid = r.routeid
+  ORDER BY f.deptime ASC
+  LIMIT 3;
+
+  SELECT f.deptime time, r.origin city, f.code flight
+  FROM flight f, route r
+  WHERE f.deptime >= "2022-12-02 02:30:57"
+  AND f.routeid = r.routeid
+  ORDER BY f.deptime ASC
+  LIMIT 3;
+*/
+
+app.get("/api/upcoming/departures", async (req, res) => {
+  const ct_string = format_date(Date.now());
+
+  db.query(
+    "SELECT f.deptime time, r.origin city, f.code flight FROM flight f, route r WHERE f.deptime >= ? AND f.routeid = r.routeid ORDER BY f.deptime ASC LIMIT 3",
+    [ct_string],
+    (err, result) => {
+      if (err) console.log(err);
+      else res.status(200).send(result);
+    }
+  );
+});
+
+app.get("/api/upcoming/arrivals", async (req, res) => {
+  const ct_string = format_date(Date.now());
+
+  db.query(
+    "SELECT f.arrivetime time, r.destination city, f.code flight FROM flight f, route r WHERE f.arrivetime >= ? AND f.routeid = r.routeid ORDER BY f.arrivetime ASC LIMIT 3",
+    [ct_string],
+    (err, result) => {
+      if (err) console.log(err);
+      else res.status(200).send(result);
+    }
+  );
 });
 
 // todo
