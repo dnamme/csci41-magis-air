@@ -169,3 +169,42 @@ footer span {
   font-size: var(--body-s);
   text-align: right;
 }
+
+/* notification */
+.notification {
+  width: 400px;
+  min-height: 64px;
+  padding: 16px 24px;
+  background-color: white;
+  border-radius: 4px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  bottom: 24px;
+  right: 32px;
+  z-index: 5;
+
+  transition: 0.5s;
+  transform: translateY(200%);
+
+  box-shadow: 0 0 16px #00000040;
+}
+
+.notification.slide-in {
+  transform: translateY(0);
+}
+
+.notification span {
+  color: var(--secondary-alt);
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+}
+
+.notification img {
+  cursor: pointer;
+}

@@ -51,7 +51,27 @@ function format_time(raw) {
   }`;
 }
 
-// todo
 function showNotification(msg) {
-  alert(msg);
+  let cont = document.createElement("div");
+  cont.classList.add("notification");
+
+  let text = document.createElement("span");
+  text.innerText = msg;
+
+  let close = document.createElement("img");
+  close.setAttribute("src", "./assets/images/close-rounded.svg");
+  close.onclick = () => document.body.removeChild(cont);
+
+  cont.appendChild(text);
+  cont.appendChild(close);
+  document.body.appendChild(cont);
+
+  setTimeout(() => cont.classList.add("slide-in"), 100);
+
+  setTimeout(() => {
+    if (!document.body.contains(cont)) return;
+
+    cont.classList.remove("slide-in");
+    setTimeout(() => document.body.removeChild(cont), 100);
+  }, 5 * 1000);
 }
