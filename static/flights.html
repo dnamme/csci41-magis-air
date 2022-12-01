@@ -14,41 +14,44 @@
   </head>
   <body>
     <header>
-        <div id="magis-air-logo">
-            <img id="logo" src="./assets/images/logo-black.svg" width=30%/>
-        </div>
         <nav id="nav-bar">
-            <ul id="nav-links">
+            <ul class="nav-links">
+                <li id="logo-container">
+                  <a href="./">
+                    <img src="./assets/images/logo-black.svg" id="logo" />
+                  </a>
+                </li>
                 <li><a href="./routes">Routes</a></li>
                 <li><a href="./flights">Flights</a></li>
-                <li><a href="./book">Booking</a></li>
+                <li><a href="./booking">Booking</a></li>
                 <li><a href="./about">About</a></li>
                 <li><a href="./admin">Admin</a></li>
-            </ul>
+              </ul>
         </nav>
     </header>
     <div id="filter">
         <div id="flight-type">
-            <li class="type"><span>ALL FLIGHTS</span></li>
-            <li class="type"><span>DEPARTURES ONLY</span></li>
-            <li class="type"><span>ARRIVALS ONLY</span></li>
+            <button class="frosted active" onclick="">ALL FLIGHTS</button>
+            <button class="frosted" onclick="">DEPARTURES ONLY</button>
+            <button class="frosted" onclick="">ARRIVALS ONLY</button>
         </div>
         <div id="search-flight">
-            <div class="frosted-button">
-                <span>FROM</span>
-                <p>Any</p>
+            <div class="frosted">
+                <label for="from">FROM</label>
+                <input type="text" name="from" id="from" placeholder="From" />
             </div>
-            <div class="frosted-button">
-                <span>TO</span>
-                <p>Singapore, SG</p>
+            <div class="frosted">
+                <label for="from">TO</label>
+                <input type="text" name="to" id="to" placeholder="To" />
             </div>
-            <div class="frosted-button">
-                <span>Date</span>
-                <p>December 9, 2022</p>
+            <div class="frosted">
+                <label for="from">DATE</label>
+                <input type="text" name="date" id="date" placeholder="Date" />
             </div>
 
-            <div class="btn"></div>
-        </div>
+            <div class="continue-container">
+                <img id="continue" src="./assets/images/continue.png" /></div>
+            </div>
     </div>
     <div id="flight-schedule">
         <div id="flight-rows">

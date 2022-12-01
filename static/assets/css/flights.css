@@ -3,49 +3,47 @@
 
 body{
     background-image: url(./../images/flights/bg.png);
+    object-fit: cover;
 }
     
 a{
     text-decoration: none;
-    color: #021425;
+    color: var(--secondary-alt);
 }
 
 li{
     list-style: none;
-    flex: 1 1 rem;
 }
 
-header{
-    font-family: 'Alexandria';
-    font-size: 18;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: grid;
-    grid-template-areas:
-        "logo nav";
-    align-items: center;
+nav{
+    padding: 0 96px;
 }
 
 #logo{
-    padding: 0rem 0rem 0rem 2.5rem;
+    height: 64px;
 }
 
-nav-bar{
-    grid-area: "nav";
-    margin: 0 48px;
-}
-
-#nav-links{
+nav ul{
     display: flex;
     flex-flow: row nowrap;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     height: 100px;
 }
 
-#nav-links li a{
+nav #logo-container {
+    margin: 0 auto 0 0;
+  }
+
+nav ul li{
+    float: left;
+    display: inline;
+    list-style-type: none;
+}
+
+nav ul li a{
     margin: 0 48px;
-    color: #021425;
+    color: var(--secondary-alt);
     font-size: var(--h3);
     font-family: Alexandria, sans-serif;
     font-weight: bold;
@@ -57,43 +55,74 @@ nav-bar{
     padding: 64px 256px 0px;
 }
 
-#flight-type{
+#flight-type {
     display: flex;
     flex-wrap: wrap;
 }
 
-#flight-type span{
+#flight-type button{
+    color: var(--gray);
     font-size: var(--body);
     font-family: Sarala, sans-serif;
     font-weight: bold;
 }
 
-.type{
+#flight-type .frosted{
     background-color: #FFFFFF;
-    backdrop-filter: blur(24px);
     padding: 0.5rem 2rem;
     margin: 0rem 0.7rem 0rem 0rem;
     height: 42px;
+    cursor: pointer;
+    outline: none;
+    border: none;
 }
 
+
+#flight-type button.active, button:hover{
+    color: var(--secondary-alt);
+}
 #search-flight{
     display: flex;
     flex-wrap: wrap;
     padding: 1rem 0rem;
 }
 
-#search-flight span{
-    font-size: var(--body);
+#search-flight label {
+    color: black;
     font-family: Sarala, sans-serif;
+    font-size: var(--body);
     font-weight: bold;
+    text-transform: uppercase;
 }
 
-.frosted-button{
+#search-flight input[type="text"] {
+    border: none;
+    background: none;
+    background-color: none !important;
+    box-shadow: none;
+  
+    color: black;
+    font-family: Sarala, sans-serif;
+    font-size: var(--body);
+    font-weight: normal;
+  
+    width: 100%;
+}
+
+#search-flight .frosted{
     background-color: #FFFFFF;
-    backdrop-filter: blur(24px);
     padding: 0.7rem 2rem;
     margin: 0rem 1rem 0rem 0rem;
     width: 15rem;
+}
+
+.continue-container{
+    background-color: var(--secondary-main);
+    padding: 1rem;
+}
+
+.continue-container img{
+    justify-self: center;
 }
 
 #flight-schedule{
