@@ -3,7 +3,26 @@
 
 @font-face {
   font-family: Alexandria;
-  src: url(./../fonts/Alexandria-VariableFont_wght.ttf);
+  src: url(./../fonts/Alexandria-Light.ttf);
+  font-weight: light;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(./../fonts/Alexandria-Regular.ttf);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(./../fonts/Alexandria-Medium.ttf);
+  font-weight: medium;
+}
+
+@font-face {
+  font-family: Alexandria;
+  src: url(./../fonts/Alexandria-Bold.ttf);
+  font-weight: bold;
 }
 
 /* global */
@@ -15,31 +34,51 @@
   font-family: "Sarala", serif;
 }
 
-/* font sizes */
-.h1 {
-  font-size: 32px;
+/* variables */
+:root {
+  --secondary-alt: #021425;
+
+  --ternary-main: #fddd02;
+  --ternary-alt: #d9bd00;
+  --ternary-light: #fff3a4;
+
+  --h1: 32px;
+  --h2: 24px;
+  --h3: 18px;
+  --h4: 16px;
+  --h5: 14px;
+  --h6: 12px;
+
+  --body-l: 20px;
+  --body: 16px;
+  --body-s: 12px;
 }
-.h2 {
-  font-size: 24px;
+
+/* buttons */
+.btn {
+  border: none;
+  display: inline-block;
+  text-decoration: none;
 }
-.h3 {
-  font-size: 18px;
+
+.btn.yellow {
+  background-color: #fddd02;
+  color: var(--secondary-alt);
 }
-.h4 {
-  font-size: 16px;
+
+.btn.yellow.l {
+  padding: 24px 48px;
+
+  font-size: var(--h2);
+  font-family: Alexandria, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
 }
-.h5 {
-  font-size: 14px;
-}
-.h6 {
-  font-size: 12px;
-}
-.bodytext-l {
-  font-size: 20px;
-}
-.bodytext {
-  font-size: 16px;
-}
-.bodytext-s {
-  font-size: 12px;
+
+.btn.yellow.s {
+  padding: 20px 32px;
+
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+  font-weight: bold;
 }
