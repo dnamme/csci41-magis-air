@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarala:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap');
+
+body{
+    background-image: url(./../images/flights/bg.png);
+}
+    
+a{
+    text-decoration: none;
+    color: #021425;
+}
+
+li{
+    list-style: none;
+    flex: 1 1 rem;
+}
+
+header{
+    font-family: 'Alexandria';
+    font-size: 18;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: grid;
+    grid-template-areas:
+        "logo nav";
+    align-items: center;
+}
+
+#logo{
+    padding: 0rem 0rem 0rem 2.5rem;
+}
+
+nav-bar{
+    grid-area: "nav";
+    margin: 0 48px;
+}
+
+#nav-links{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+#nav-links li a{
+    margin: 0 48px;
+    color: #021425;
+    font-size: var(--h3);
+    font-family: Alexandria, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+#filter{
+    padding: 64px 256px 0px;
+}
+
+#flight-type{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#flight-type span{
+    font-size: var(--body);
+    font-family: Sarala, sans-serif;
+    font-weight: bold;
+}
+
+.type{
+    background-color: #FFFFFF;
+    backdrop-filter: blur(24px);
+    padding: 0.5rem 2rem;
+    margin: 0rem 0.7rem 0rem 0rem;
+    height: 42px;
+}
+
+#search-flight{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0rem;
+}
+
+#search-flight span{
+    font-size: var(--body);
+    font-family: Sarala, sans-serif;
+    font-weight: bold;
+}
+
+.frosted-button{
+    background-color: #FFFFFF;
+    backdrop-filter: blur(24px);
+    padding: 0.7rem 2rem;
+    margin: 0rem 1rem 0rem 0rem;
+    width: 15rem;
+}
+
+#flight-schedule{
+    background-color:#FFFFFF;
+    backdrop-filter: blur(24px);
+    margin: 0px 150px 118px;
+}
+
+#flight-schedule span{
+    font-size: var(--body);
+    font-family: Sarala, sans-serif;
+    font-weight: bold;
+    padding: 30px;
+}
+
+#flight-rows{
+    padding: 0px 128px 54px 128px;
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0rem;
+}
+
+footer {
+    background-color: black;
+  
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 0 128px;
+    min-height: 80px;
+  }
+  
+  footer #logo {
+    height: 48px;
+  }
+  
+  footer span {
+    color: white;
+    font-size: var(--body-s);
+    text-align: right;
+  }
