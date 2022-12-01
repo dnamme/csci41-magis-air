@@ -95,7 +95,7 @@ VALUES
 (48, 1);
 
 INSERT INTO
-FLIGHT(deptime, arrivetime, duration, cost, routeid)
+FLIGHT(deptime, arrivetime, cost, routeid)
 VALUES
 ('2021-01-30 20:25:00', '2021-01-30 23:55:00', 265, 1),
 ('1970-01-01 00:45:00', '1970-01-01 4:00:00', 265, 2),
