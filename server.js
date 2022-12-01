@@ -5,6 +5,7 @@ const path = require("path");
 const cors = require("cors");
 
 const mysql = require("mysql");
+const { send } = require("process");
 
 /**
  * App and connection setup
@@ -82,16 +83,24 @@ app.get("/", (req, res) => {
   send_file(res, "./static/index.html");
 });
 
-app.get("/flights", (req, res) => {
-  send_file(res, "./static/flights.html");
-});
-
 app.get("/routes", (req, res) => {
   send_file(res, "./static/routes.html");
 });
 
+app.get("/flights", (req, res) => {
+  send_file(res, "./static/flights.html");
+});
+
+app.get("/booking", (req, res) => {
+  send_file(res, "./static/booking.html");
+});
+
 app.get("/about", (req, res) => {
   send_file(res, "./static/about.html");
+});
+
+app.get("/admin", (req, res) => {
+  send_file(res, "./static/admin.html");
 });
 
 /**
