@@ -16,6 +16,7 @@ function format_time(raw) {
     .padStart(2, "0")} ${dt.getHours() >= 12 ? "PM" : "AM"}`;
 }
 
+// todo
 function showNotification(msg) {
   alert(msg);
 }
