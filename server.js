@@ -125,7 +125,42 @@ app.post("/api/message", (req, res) => {
 
 // todo
 app.get("/api/upcoming-flights", (req, res) => {
-  set_json(res).send(sampmsg);
+  set_json(res).send({
+    departures: [
+      {
+        time: "2025-12-21 20:25:00",
+        city: "Los Angeles",
+        flight: "MA 800",
+      },
+      {
+        time: "2025-12-21 21:25:00",
+        city: "Los Angeles",
+        flight: "MA 801",
+      },
+      {
+        time: "2025-12-21 22:25:00",
+        city: "Los Angeles",
+        flight: "MA 802",
+      },
+    ],
+    arrivals: [
+      {
+        time: "2025-12-21 15:25:00",
+        city: "Los Angeles",
+        flight: "MA 803",
+      },
+      {
+        time: "2025-12-21 16:25:00",
+        city: "Los Angeles",
+        flight: "MA 804",
+      },
+      {
+        time: "2025-12-21 17:25:00",
+        city: "Los Angeles",
+        flight: "MA 805",
+      },
+    ],
+  });
 });
 
 // todo
@@ -183,7 +218,7 @@ app.get("/api/flight/:id", (req, res) => {
 /**
  * Running the app
  */
-const port = process.env.PORT || 3001;
+const port = 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
   console.log(`Open via the link: http://localhost:${port}`);
