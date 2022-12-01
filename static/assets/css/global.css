@@ -1,0 +1,45 @@
+/* typefaces */
+@import url("https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap");
+
+@font-face {
+  font-family: Alexandria;
+  src: url(./../fonts/Alexandria-VariableFont_wght.ttf);
+}
+
+/* global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Sarala", serif;
+}
+
+/* font sizes */
+.h1 {
+  font-size: 32px;
+}
+.h2 {
+  font-size: 24px;
+}
+.h3 {
+  font-size: 18px;
+}
+.h4 {
+  font-size: 16px;
+}
+.h5 {
+  font-size: 14px;
+}
+.h6 {
+  font-size: 12px;
+}
+.bodytext-l {
+  font-size: 20px;
+}
+.bodytext {
+  font-size: 16px;
+}
+.bodytext-s {
+  font-size: 12px;
+}

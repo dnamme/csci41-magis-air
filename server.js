@@ -5,13 +5,17 @@ const path = require("path");
 const cors = require("cors");
 
 const mysql = require("mysql");
-// this is all sample code
+
+/**
+ * App and connection setup
+ */
 app.use(
   cors({
     origin: "*",
-  })
+  }),
+  express.json(),
+  express.static("static")
 );
-app.use(express.json());
 
 const db = mysql.createConnection({
   user: "root",
@@ -20,6 +24,7 @@ const db = mysql.createConnection({
   database: "booksdb",
 });
 
+// this is all sample code
 app.get("/api/test", (req, res) => {
   db.query("SELECT * FROM book", [], (err, result) => {
     if (err) console.log(err);
@@ -51,38 +56,51 @@ app.get("/api/html", (req, res) => {
 const sampmsg = { message: "ok" };
 
 /**
- * Pages
- */
-app.get("/", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "./pages/index.html"));
-});
-
-app.get("/flights", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "./pages/flights.html"));
-});
-
-app.get("/routes", (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, "./pages/routes.html"));
-});
-
-/**
- * API
+ * Helper functions
  */
 function set_json(res) {
   res.status(200).setHeader("content-type", "application/json");
   return res;
 }
 
-function set_error(res, msg = "") {
+function send_error(res, msg = "") {
   res.status(400).setHeader("content-type", "application/json").send({
     message: msg,
   });
   return res;
 }
 
+function send_file(res, dir) {
+  res.status(200).sendFile(path.join(__dirname, dir));
+  return res;
+}
+
+/**
+ * Pages
+ */
+app.get("/", (req, res) => {
+  send_file(res, "./static/index.html");
+});
+
+app.get("/flights", (req, res) => {
+  send_file(res, "./static/flights.html");
+});
+
+app.get("/routes", (req, res) => {
+  send_file(res, "./static/routes.html");
+});
+
+app.get("/about", (req, res) => {
+  send_file(res, "./static/about.html");
+});
+
+/**
+ * API
+ */
+
 app.post("/api/message", (req, res) => {
   if (!req.query.name || !req.query.email || !req.query.message) {
-    set_error(res, "No name, email, or message!");
+    send_error(res, "No name, email, or message!");
   } else {
     set_json(res).send({
       name: req.query.name,
@@ -90,15 +108,18 @@ app.post("/api/message", (req, res) => {
       message: req.query.message,
     });
 
-    console.log(`Message from ${req.query.name} (${req.query.email}):`);
-    console.log(req.query.message);
+    console.log(
+      `Message from ${req.query.name} (${req.query.email}): ${req.query.message}`
+    );
   }
 });
 
+// todo
 app.get("/api/upcoming-flights", (req, res) => {
   set_json(res).send(sampmsg);
 });
 
+// todo
 app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
   // mode = 0b01 = 1 = arrivals only
   // mode = 0b10 = 2 = departures only
@@ -111,6 +132,13 @@ app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
     month: req.params.month,
     day: req.params.day,
   });
+
+  let query = "SELECT ... FROM ...";
+  if (req.params.mode == 3) {
+    query = "";
+  } else {
+    //
+  }
 
   /*
 
@@ -136,6 +164,7 @@ app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
   */
 });
 
+// todo
 app.get("/api/flight/:id", (req, res) => {
   set_json(res).send({
     id: req.params.id,
