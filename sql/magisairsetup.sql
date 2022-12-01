@@ -117,6 +117,7 @@ CREATE TABLE FLIGHT(
     deptime DATETIME,
     arrivetime DATETIME,
     cost FLOAT,
+    code VARCHAR (10),
     FOREIGN KEY (routeid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT
 );
 
