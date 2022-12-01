@@ -114,9 +114,8 @@ CREATE TABLE ADDITIONALITEM(
 CREATE TABLE FLIGHT(
     flightid INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
     routeid INT,
-    deptime TIME,
-    arrivetime TIME,
-    duration TIME,
+    deptime DATETIME,
+    arrivetime DATETIME,
     cost FLOAT,
     FOREIGN KEY (routeid) REFERENCES ROUTE(routeid) ON DELETE RESTRICT
 );
@@ -127,13 +126,6 @@ CREATE TABLE CREW(
     lname VARCHAR(100),
     middleinitial VARCHAR(3),
     role VARCHAR(100)
-);
-
-CREATE TABLE DAYSCHEDULE(
-    date DATE,
-    flightscheduleid INT NOT NULL AUTO_INCREMENT UNIQUE PRIMARY KEY,
-    flightid INT,
-    FOREIGN KEY (flightid) REFERENCES FLIGHT(flightid) ON DELETE RESTRICT
 );
 
 CREATE TABLE TRAVELHISTORY(
