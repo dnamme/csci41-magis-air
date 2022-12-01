@@ -10,8 +10,89 @@
     <link rel="icon" href="./assets/images/icon.png" />
 
     <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/css/about.css" />
+
+    <script src="./assets/js/global.js"></script>
+    <script src="./assets/js/about.js"></script>
   </head>
   <body>
-    ABOUT
+    <div id="hero">
+      <nav>
+        <ul>
+          <li id="logo-container">
+            <a href="./">
+              <img src="./assets/images/logo.svg" id="logo" />
+            </a>
+          </li>
+          <li><a href="./routes">Routes</a></li>
+          <li><a href="./flights">Flights</a></li>
+          <li><a href="./booking">Booking</a></li>
+          <li><a href="./about">About</a></li>
+          <li><a href="./admin">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div id="content">
+      <div id="desc">
+        <h1>About Magis Air</h1>
+        <p>
+          Founded in 2022, Magis Air has served millions of people across the
+          world with excellent customer service and dependable aircraft
+          performance. The Magis Air Group operates more than 150 aircraft,
+          flying to over 170 destinations worldwide. We are committed to growing
+          our operation to help strengthen our role as one of the premier
+          international aviation hubs.
+        </p>
+      </div>
+
+      <div id="members">
+        <h2>Members</h2>
+        <p>Marc Andre Bascara</p>
+        <p>Szel Leeven Embay</p>
+        <p>Emmanuel Linus Evangelista</p>
+        <p>Swailem Neil Angelo Lumba</p>
+        <p>Kyla Sydney Martin</p>
+      </div>
+
+      <form id="contact-form">
+        <h2>Contact Form</h2>
+
+        <div class="frosted">
+          <label for="name">Your Name</label>
+          <input type="text" name="name" id="name" placeholder="Name" />
+        </div>
+
+        <div class="frosted">
+          <label for="email">Your E-mail</label>
+          <input type="text" name="email" id="email" placeholder="E-mail" />
+        </div>
+
+        <div class="frosted">
+          <label for="message">Your Message</label>
+          <input
+            type="text"
+            name="message"
+            id="message"
+            placeholder="Enter message here"
+          />
+        </div>
+
+        <input
+          type="submit"
+          value="Send Message"
+          onclick="onSendMessage()"
+          class="btn yellow s"
+          id="submit"
+        />
+      </form>
+    </div>
+
+    <footer>
+      <img id="logo" src="./assets/images/logo.svg" />
+      <span
+        >&copy; Mga Alagad ni Mariah Carey 2022<br />All Rights Reserved</span
+      >
+    </footer>
   </body>
 </html>

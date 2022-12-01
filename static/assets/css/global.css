@@ -36,11 +36,19 @@
 
 /* variables */
 :root {
+  --primary-main: #357bb6;
+  --primary-alt: #102436;
+  --primary-light: #729ec1;
+
+  --secondary-main: #02284c;
   --secondary-alt: #021425;
+  --secondary-light: #055199;
 
   --ternary-main: #fddd02;
   --ternary-alt: #d9bd00;
   --ternary-light: #fff3a4;
+
+  --gray: #a0a0a0;
 
   --h1: 32px;
   --h2: 24px;
@@ -61,9 +69,18 @@
   text-decoration: none;
 }
 
+.btn:not([disabled]) {
+  cursor: pointer;
+}
+
 .btn.yellow {
   background-color: #fddd02;
   color: var(--secondary-alt);
+}
+
+.btn.yellow[disabled] {
+  background-color: #e0e0e0;
+  color: var(--gray);
 }
 
 .btn.yellow.l {
@@ -81,6 +98,10 @@
   font-size: var(--body);
   font-family: Sarala, sans-serif;
   font-weight: bold;
+}
+
+.frosted {
+  backdrop-filter: blur(24px);
 }
 
 /* loader */
@@ -124,4 +145,27 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* footer */
+footer {
+  background-color: black;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 128px;
+  min-height: 80px;
+}
+
+footer #logo {
+  height: 48px;
+}
+
+footer span {
+  color: white;
+  font-size: var(--body-s);
+  text-align: right;
 }

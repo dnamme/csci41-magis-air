@@ -1,0 +1,156 @@
+/* hero */
+#hero {
+  background-image: url(./../images/about/1.jpg);
+  background-size: cover;
+  background-position: center;
+
+  min-height: 512px;
+}
+
+#hero nav {
+  padding: 0 96px;
+}
+
+#hero nav #logo-container {
+  margin: 0 auto 0 0;
+}
+
+#hero nav #logo {
+  height: 64px;
+}
+
+#hero nav ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  height: 100px;
+}
+
+#hero nav ul li {
+  float: left;
+  display: inline;
+  list-style-type: none;
+}
+
+#hero nav ul li a {
+  margin: 0 48px;
+
+  color: white;
+  font-size: var(--h3);
+  font-family: Alexandria, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+/* content */
+#content {
+  background-image: url(./../images/about/2.png);
+  background-size: cover;
+  background-position: center;
+
+  padding: 48px 160px 96px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "desc desc"
+    "members contact";
+}
+
+#content h1 {
+  font-size: var(--h1);
+  text-transform: uppercase;
+}
+
+#content h2 {
+  font-size: var(--h2);
+  text-transform: uppercase;
+
+  text-align: center;
+}
+
+#content p {
+  font-size: var(--body-l);
+}
+
+#content #desc {
+  grid-area: desc;
+
+  text-align: center;
+}
+
+#content #members {
+  grid-area: members;
+}
+
+#content #contact-form {
+  grid-area: contact;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "heading heading"
+    "name email"
+    "message message"
+    "submit submit";
+  column-gap: 32px;
+  row-gap: 16px;
+}
+
+#content #contact-form h2 {
+  grid-area: heading;
+}
+
+#content #contact-form div {
+  background-color: #ffffff80;
+  padding: 12px 32px;
+}
+#content #contact-form div > * {
+  display: block;
+}
+
+#content #contact-form div:first-of-type {
+  grid-area: name;
+}
+#content #contact-form div:nth-of-type(2) {
+  grid-area: email;
+}
+#content #contact-form div:last-of-type {
+  grid-area: message;
+}
+
+#content #contact-form label {
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+#content #contact-form input[type="text"] {
+  border: none;
+  background: none;
+  background-color: none !important;
+  box-shadow: none;
+
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: normal;
+
+  width: 100%;
+}
+
+#content #contact-form input[type="submit"] {
+  grid-area: submit;
+  justify-self: center;
+
+  text-transform: uppercase;
+}
+
+#content #contact-form ::placeholder {
+  color: var(--gray);
+}

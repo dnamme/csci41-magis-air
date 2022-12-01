@@ -78,7 +78,6 @@
 
 #upcoming-flights .board {
   padding: 20px 48px;
-  backdrop-filter: blur(24px);
 }
 
 #upcoming-flights .board-wrapper h2 {
@@ -182,27 +181,4 @@
     transform: translateY(0);
     opacity: 1;
   }
-}
-
-/* footer */
-footer {
-  background-color: black;
-
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 0 128px;
-  min-height: 80px;
-}
-
-footer #logo {
-  height: 48px;
-}
-
-footer span {
-  color: white;
-  font-size: var(--body-s);
-  text-align: right;
 }

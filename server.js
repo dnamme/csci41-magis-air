@@ -108,19 +108,26 @@ app.get("/admin", (req, res) => {
  */
 
 app.post("/api/message", (req, res) => {
-  if (!req.query.name || !req.query.email || !req.query.message) {
-    send_error(res, "No name, email, or message!");
-  } else {
-    set_json(res).send({
-      name: req.query.name,
-      email: req.query.email,
-      message: req.query.message,
-    });
+  let key = null;
 
-    console.log(
-      `Message from ${req.query.name} (${req.query.email}): ${req.query.message}`
-    );
+  if (req.query.name && req.query.email && req.query.message) {
+    key = "query";
+  } else if (req.body.name && req.body.name && req.body.message) {
+    key = "body";
+  } else {
+    send_error(res, "No name, email, or message!");
+    return;
   }
+
+  set_json(res).send({
+    name: req[key].name,
+    email: req[key].email,
+    message: req[key].message,
+  });
+
+  console.log(
+    `Message from ${req[key].name} (${req[key].email}): ${req[key].message}`
+  );
 });
 
 // todo

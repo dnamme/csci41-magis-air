@@ -1,21 +1,3 @@
-function stat(res) {
-  if (res.status >= 200 && res.status < 300) return Promise.resolve(res);
-  else return Promise.reject(new Error(res.statusText));
-}
-
-function json(res) {
-  return res.json();
-}
-
-function format_time(raw) {
-  let dt = new Date(raw);
-
-  return `${dt.getHours().toString().padStart(2, "0")}:${dt
-    .getMinutes()
-    .toString()
-    .padStart(2, "0")} ${dt.getHours() >= 12 ? "PM" : "AM"}`;
-}
-
 var loc_animation;
 var loc_index = 0;
 function start_location_animation() {
@@ -44,7 +26,7 @@ function start_location_animation() {
 window.onload = () => {
   start_location_animation();
 
-  fetch("http://localhost:3001/api/upcoming-flights")
+  fetch("./api/upcoming-flights")
     .then(stat)
     .then(json)
     .then((data) => {
@@ -67,7 +49,7 @@ window.onload = () => {
 
         // add departures board
         let b_dept = document.createElement("div");
-        b_dept.classList.add("board");
+        b_dept.classList.add("board", "frosted");
 
         for (let j = 0; j < data.departures.length; j++) {
           let key = keys[i].toLowerCase();
