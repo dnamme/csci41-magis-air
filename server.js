@@ -75,6 +75,18 @@ app.get("/booking", (req, res) => {
   send_file(res, "./static/booking.html");
 });
 
+app.get("/booking/flight/:id", (req, res) => {
+  send_file(res, "./static/booking-forms.html");
+});
+
+app.get("/booking/review", (req, res) => {
+  send_file(res, "./static/booking-review.html");
+});
+
+app.get("/booking/success", (req, res) => {
+  send_file(res, "./static/booking-success.html");
+});
+
 app.get("/about", (req, res) => {
   send_file(res, "./static/about.html");
 });
