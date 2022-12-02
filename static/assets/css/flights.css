@@ -14,7 +14,7 @@ a{
 li{
     list-style: none;
 }
-
+/* everything in header */
 nav{
     padding: 0 96px;
 }
@@ -51,6 +51,8 @@ nav ul li a{
     text-decoration: none;
 }
 
+/* filter buttons */
+
 #filter{
     padding: 64px 256px 0px;
 }
@@ -69,8 +71,8 @@ nav ul li a{
 
 #flight-type .frosted{
     background-color: #FFFFFF;
-    padding: 0.5rem 2rem;
-    margin: 0rem 0.7rem 0rem 0rem;
+    padding: 8px 32px;
+    margin: 0 11.2px 0 0;
     height: 42px;
     cursor: pointer;
     outline: none;
@@ -81,10 +83,12 @@ nav ul li a{
 #flight-type button.active, button:hover{
     color: var(--secondary-alt);
 }
+
+/* search */
 #search-flight{
     display: flex;
     flex-wrap: wrap;
-    padding: 1rem 0rem;
+    padding: 16px 0;
 }
 
 #search-flight label {
@@ -95,7 +99,7 @@ nav ul li a{
     text-transform: uppercase;
 }
 
-#search-flight input[type="text"] {
+#search-flight input[type="search"] {
     border: none;
     background: none;
     background-color: none !important;
@@ -111,19 +115,20 @@ nav ul li a{
 
 #search-flight .frosted{
     background-color: #FFFFFF;
-    padding: 0.7rem 2rem;
-    margin: 0rem 1rem 0rem 0rem;
-    width: 15rem;
+    padding: 11.2px 32px;
+    margin: 0 16px 0 0;
+    width: 240px;
 }
 
 .continue-container{
     background-color: var(--secondary-main);
-    padding: 1rem;
+    padding: 11.2px 16px;
+    cursor: pointer;
+    outline: none;
+    border: none;
 }
 
-.continue-container img{
-    justify-self: center;
-}
+/* the schedule itself */
 
 #flight-schedule{
     background-color:#FFFFFF;
@@ -150,9 +155,11 @@ nav ul li a{
     justify-content: space-around;
     flex-wrap: wrap;
     align-items: center;
-    padding: 1rem;
-    margin: 0.5rem 0rem;
+    padding: 16px;
+    margin: 8px 0;
 }
+
+/* footer */
 
 footer {
     background-color: black;
