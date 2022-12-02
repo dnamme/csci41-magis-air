@@ -81,6 +81,6 @@ window.onload = () => {
         // remove loader
         if (i == 1) parent.removeChild(loader);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => showNotification(err));
   }
 };
