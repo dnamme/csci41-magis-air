@@ -222,7 +222,7 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   let ndate = format_date(n);
 
   let query =
-    "SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, f.cost FROM flight f, route r WHERE f.routeid = r.routeid AND (";
+    "SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r WHERE f.routeid = r.routeid AND (";
   let q_loc = "";
   let params = [];
   let p_loc = [];
@@ -239,7 +239,7 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   }
 
   if (req.params.mode === "arrivals" || req.params.mode === "all") {
-    query += "(f.arrivetime >= ? AND f.deptime < ?)";
+    query += "(f.arrivetime >= ? AND f.arrivetime < ?)";
     params.push(cdate, ndate);
 
     if (req.query.to) {
