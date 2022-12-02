@@ -1,239 +1,126 @@
-function allFlights() {
-  let row = document.querySelectorAll(".row-wrapper");
+let c_mode;
 
-  if (row != null) {
-    for (let n = 0; n < row.length; n++) {
-      row[n].innerHTML = "";
-    }
-  }
+function onFilterClick(mode = null) {
+  if (mode) c_mode = mode;
 
-  let keys = ["All/2010/01/01"]; //to be changed
+  let buttons = document.querySelectorAll("#flight-type button");
+  buttons.forEach((b) => {
+    b.classList.remove("active");
+    if (b.id == c_mode) b.classList.add("active");
+  });
 
-  let parent = document.querySelector("#flight-schedule #flight-rows");
-  let loader = document.querySelector("#flight-schedule #flight-rows .blank");
-
-  for (let i = 0; i < 1; i++) {
-    fetch(`./api/flights/${keys[i].toLowerCase()}`)
-      .then(json)
-      .then((data) => {
-        //add flight row wrapper??
-        let flight_wrapper = document.createElement("div");
-        flight_wrapper.classList.add("row-wrapper");
-
-        for (let j = 0; j < data.length; j++) {
-          //add flight row
-          let flight_row = document.createElement("div");
-          flight_row.classList.add("row");
-
-          //flight code
-          let code = document.createElement("p");
-          code.classList.add("code");
-          code.innerText = `${data[j].code}`;
-
-          //origin country
-          let origin = document.createElement("p");
-          origin.classList.add("origin");
-          origin.innerText = `${data[j].origin} `;
-
-          //departing time
-          let deptime = document.createElement("p");
-          deptime.classList.add("depttime");
-          deptime.innerText = `${format_time(data[j].deptime)}`;
-
-          //airplane
-          let airplane = document.createElement("img");
-          airplane.src = "./assets/images/airplane-45-black.svg";
-
-          //arriving time
-          let arrivetime = document.createElement("p");
-          arrivetime.classList.add("arrivetime");
-          arrivetime.innerText = `${format_time(data[j].arrivetime)}`;
-
-          //destination country
-          let destination = document.createElement("p");
-          destination.classList.add("destination");
-          destination.innerText = `${data[j].destination} `;
-
-          //city
-          let cost = document.createElement("p");
-          cost.classList.add("cost");
-          cost.innerText = `${data[j].cost} `;
-
-          flight_row.appendChild(code);
-          flight_row.appendChild(origin);
-          flight_row.appendChild(deptime);
-          flight_row.appendChild(airplane);
-          flight_row.appendChild(arrivetime);
-          flight_row.appendChild(destination);
-          flight_row.appendChild(cost);
-
-          flight_wrapper.appendChild(flight_row);
-
-          parent.insertBefore(flight_wrapper, loader);
-        }
-        // remove loader
-        if (i == 1) parent.removeChild(loader);
-      })
-      .catch((err) => console.log(err));
-  }
+  updateTable();
 }
 
-function allDepartures() {
-  let row = document.querySelectorAll(".row-wrapper");
+function updateTable() {
+  const mode = {
+    "all-flights": "all",
+    "departures-only": "departures",
+    "arrivals-only": "arrivals",
+  }[c_mode];
 
-  if (row != null) {
-    for (let n = 0; n < row.length; n++) {
-      row[n].innerHTML = "";
-    }
+  let date = new Date(document.querySelector("#search-flight #date").value);
+
+  let url = `./api/flights/${mode}/${date.getFullYear()}/${
+    date.getMonth() + 1
+  }/${date.getDate()}`;
+
+  let from = document.querySelector("#search-flight #from").value.trim();
+  let to = document.querySelector("#search-flight #to").value.trim();
+
+  if (from) url += `?from=${from}`;
+  if (to) {
+    if (from) url += "&";
+    else url += "?";
+
+    url += `to=${to}`;
   }
 
-  let keys = ["All/2010/01/01?from=Manila"]; //to be changed
+  fetch(url)
+    .then(stat)
+    .then(json)
+    .then((data) => {
+      // empty out schedule
+      const board = document.querySelector("#flight-schedule");
+      board.innerHTML = "";
 
-  let parent = document.querySelector("#flight-schedule #flight-rows");
-  let loader = document.querySelector("#flight-schedule #flight-rows .blank");
+      if (data.length === 0) {
+        let text = document.createElement("p");
+        text.innerText = "No flights found";
 
-  for (let i = 0; i < 1; i++) {
-    fetch(`./api/flights/${keys[i].toLowerCase()}`)
-      .then(json)
-      .then((data) => {
-        //add flight row wrapper??
-        let flight_wrapper = document.createElement("div");
-        flight_wrapper.classList.add("row-wrapper");
+        board.append(text);
+      }
 
-        for (let j = 0; j < data.length; j++) {
-          //add flight row
-          let flight_row = document.createElement("div");
-          flight_row.classList.add("row");
+      data.forEach((flight) => {
+        // row
+        let row = document.createElement("div");
+        row.classList.add("row");
 
-          //flight code
-          let code = document.createElement("p");
-          code.classList.add("code");
-          code.innerText = `${data[j].code}`;
+        // code
+        let code = document.createElement("p");
+        code.classList.add("code");
+        code.innerText = flight.code;
 
-          //origin country
-          let origin = document.createElement("p");
-          origin.classList.add("origin");
-          origin.innerText = `${data[j].origin} `;
+        // origin
+        let origin = document.createElement("p");
+        origin.classList.add("city");
+        origin.innerText = flight.origin;
 
-          //departing time
-          let deptime = document.createElement("p");
-          deptime.classList.add("depttime");
-          deptime.innerText = `${format_time(data[j].deptime)}`;
+        // departure time
+        let deptime = document.createElement("p");
+        deptime.classList.add("time");
+        deptime.innerText = `${format_date(flight.deptime)} ${format_time(
+          flight.deptime
+        )}`;
 
-          //airplane
-          let airplane = document.createElement("img");
-          airplane.src = "./assets/images/airplane-45-black.svg";
+        // airplane
+        let airplane = document.createElement("img");
+        airplane.src = "./assets/images/airplane-45-black.svg";
 
-          //arriving time
-          let arrivetime = document.createElement("p");
-          arrivetime.classList.add("arrivetime");
-          arrivetime.innerText = `${format_time(data[j].arrivetime)}`;
+        // arrival time
+        let arrivetime = document.createElement("p");
+        arrivetime.classList.add("time");
+        arrivetime.innerText = `${format_date(flight.arrivetime)} ${format_time(
+          flight.arrivetime
+        )}`;
 
-          //destination country
-          let destination = document.createElement("p");
-          destination.classList.add("destination");
-          destination.innerText = `${data[j].destination} `;
+        // destination
+        let destination = document.createElement("p");
+        destination.classList.add("city");
+        destination.innerText = flight.destination;
 
-          //city
-          let cost = document.createElement("p");
-          cost.classList.add("cost");
-          cost.innerText = `${data[j].cost} `;
+        // duration
+        let duration = document.createElement("p");
+        duration.classList.add("duration");
+        duration.innerText = flight.duration;
 
-          flight_row.appendChild(code);
-          flight_row.appendChild(origin);
-          flight_row.appendChild(deptime);
-          flight_row.appendChild(airplane);
-          flight_row.appendChild(arrivetime);
-          flight_row.appendChild(destination);
-          flight_row.appendChild(cost);
+        // cost
+        let cost = document.createElement("p");
+        cost.classList.add("cost");
+        cost.innerText = `$${flight.cost}`;
 
-          flight_wrapper.appendChild(flight_row);
-
-          parent.insertBefore(flight_wrapper, loader);
-        }
-        // remove loader
-        if (i == 1) parent.removeChild(loader);
-      })
-      .catch((err) => console.log(err));
-  }
+        // adding all
+        row.append(
+          code,
+          origin,
+          deptime,
+          airplane,
+          arrivetime,
+          destination,
+          duration,
+          cost
+        );
+        board.appendChild(row);
+      });
+    })
+    .catch((err) => showNotification(err));
 }
 
-function allArrivals() {
-  let row = document.querySelectorAll(".row-wrapper");
+function init() {
+  // set date
+  const date_elem = document.querySelector("#search-flight #date");
+  date_elem.value = new Date().toISOString().substring(0, 10);
 
-  if (row != null) {
-    for (let n = 0; n < row.length; n++) {
-      row[n].innerHTML = "";
-    }
-  }
-
-  let keys = ["All/2010/01/01?to=Manila"]; //to be changed
-
-  let parent = document.querySelector("#flight-schedule #flight-rows");
-  let loader = document.querySelector("#flight-schedule #flight-rows .blank");
-
-  for (let i = 0; i < 1; i++) {
-    fetch(`./api/flights/${keys[i].toLowerCase()}`)
-      .then(json)
-      .then((data) => {
-        //add flight row wrapper??
-        let flight_wrapper = document.createElement("div");
-        flight_wrapper.classList.add("row-wrapper");
-
-        for (let j = 0; j < data.length; j++) {
-          //add flight row
-          let flight_row = document.createElement("div");
-          flight_row.classList.add("row");
-
-          //flight code
-          let code = document.createElement("p");
-          code.classList.add("code");
-          code.innerText = `${data[j].code}`;
-
-          //origin country
-          let origin = document.createElement("p");
-          origin.classList.add("origin");
-          origin.innerText = `${data[j].origin} `;
-
-          //departing time
-          let deptime = document.createElement("p");
-          deptime.classList.add("depttime");
-          deptime.innerText = `${format_time(data[j].deptime)}`;
-
-          //airplane
-          let airplane = document.createElement("img");
-          airplane.src = "./assets/images/airplane-45-black.svg";
-
-          //arriving time
-          let arrivetime = document.createElement("p");
-          arrivetime.classList.add("arrivetime");
-          arrivetime.innerText = `${format_time(data[j].arrivetime)}`;
-
-          //destination country
-          let destination = document.createElement("p");
-          destination.classList.add("destination");
-          destination.innerText = `${data[j].destination} `;
-
-          //city
-          let cost = document.createElement("p");
-          cost.classList.add("cost");
-          cost.innerText = `${data[j].cost} `;
-
-          flight_row.appendChild(code);
-          flight_row.appendChild(origin);
-          flight_row.appendChild(deptime);
-          flight_row.appendChild(airplane);
-          flight_row.appendChild(arrivetime);
-          flight_row.appendChild(destination);
-          flight_row.appendChild(cost);
-
-          flight_wrapper.appendChild(flight_row);
-
-          parent.insertBefore(flight_wrapper, loader);
-        }
-        // remove loader
-        if (i == 1) parent.removeChild(loader);
-      })
-      .catch((err) => console.log(err));
-  }
+  // show all flights
+  onFilterClick("all-flights");
 }

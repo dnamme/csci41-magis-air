@@ -32,46 +32,70 @@
         </ul>
       </nav>
     </header>
+
     <div id="filter">
       <div id="flight-type">
-        <button class="frosted active" onclick="allFlights()">
+        <button
+          id="all-flights"
+          class="frosted active"
+          onclick="onFilterClick('all-flights')"
+        >
           ALL FLIGHTS
         </button>
-        <button class="frosted" onclick="allDepartures()">
+        <button
+          id="departures-only"
+          class="frosted"
+          onclick="onFilterClick('departures-only')"
+        >
           DEPARTURES ONLY
         </button>
-        <button class="frosted" onclick="allArrivals()">ARRIVALS ONLY</button>
+        <button
+          id="arrivals-only"
+          class="frosted"
+          onclick="onFilterClick('arrivals-only')"
+        >
+          ARRIVALS ONLY
+        </button>
       </div>
+
       <div id="search-flight">
         <div class="frosted">
-          <label for="from">FROM</label>
-          <input type="search" name="from" id="from" placeholder="From" />
-        </div>
-        <div class="frosted">
-          <label for="from">TO</label>
-          <input type="search" name="to" id="to" placeholder="To" />
-        </div>
-        <div class="frosted">
-          <label for="from">DATE</label>
-          <input type="search" name="date" id="date" placeholder="Date" />
+          <label for="from">From</label>
+          <input
+            type="search"
+            name="from"
+            id="from"
+            placeholder="Any location"
+          />
         </div>
 
-        <button class="continue-container" onclick="">
+        <div class="frosted">
+          <label for="to">To</label>
+          <input type="search" name="to" id="to" placeholder="Any location" />
+        </div>
+
+        <div class="frosted">
+          <label for="date">Date</label>
+          <input type="date" name="date" id="date" placeholder="Date" />
+        </div>
+
+        <button class="continue-container" onclick="onFilterClick()">
           <img id="continue" src="./assets/images/continue.svg" />
         </button>
       </div>
     </div>
-    <div id="flight-schedule">
-      <div id="flight-rows">
-        <span>Select a flight to learn more details</span>
-        <div class="blank"></div>
-      </div>
-    </div>
+
+    <div id="flight-schedule" class="frosted"></div>
+
     <footer>
       <img id="logo" src="./assets/images/logo.svg" />
       <span
         >&copy; Mga Alagad ni Mariah Carey 2022<br />All Rights Reserved</span
       >
     </footer>
+
+    <script>
+      init();
+    </script>
   </body>
 </html>

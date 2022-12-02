@@ -34,6 +34,12 @@
   font-family: "Sarala", sans-serif;
 }
 
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
+
 /* variables */
 :root {
   --primary-main: #357bb6;
@@ -158,6 +164,7 @@ footer {
 
   padding: 0 128px;
   min-height: 80px;
+  margin-top: auto;
 }
 
 footer #logo {

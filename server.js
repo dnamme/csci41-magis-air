@@ -223,33 +223,32 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
 
   let query =
     "SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r WHERE f.routeid = r.routeid AND (";
-  let q_loc = "";
   let params = [];
-  let p_loc = [];
 
   if (req.params.mode === "departures" || req.params.mode === "all") {
     query += "(f.deptime >= ? AND f.deptime < ?)";
     if (req.params.mode === "all") query += " OR ";
     params.push(cdate, ndate);
-
-    if (req.query.from) {
-      q_loc += " AND r.origin = ?";
-      p_loc.push(req.query.from);
-    }
   }
 
   if (req.params.mode === "arrivals" || req.params.mode === "all") {
     query += "(f.arrivetime >= ? AND f.arrivetime < ?)";
     params.push(cdate, ndate);
-
-    if (req.query.to) {
-      q_loc += " AND r.destination = ?";
-      p_loc.push(req.query.to);
-    }
   }
 
-  query += ")" + q_loc + " ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
-  params.push(...p_loc);
+  query += ")";
+
+  if (req.query.from) {
+    query += " AND r.origin = ?";
+    params.push(req.query.from);
+  }
+
+  if (req.query.to) {
+    query += " AND r.destination = ?";
+    params.push(req.query.to);
+  }
+
+  query += " ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
 
   db.query(query, params, (err, result) => {
     if (err) send_error(res, err);
