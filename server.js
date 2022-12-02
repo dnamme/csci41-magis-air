@@ -1,12 +1,9 @@
 const express = require("express");
-const app = express();
-
 const path = require("path");
 const cors = require("cors");
-
 const mysql = require("mysql");
-const { send } = require("process");
 
+const app = express();
 /**
  * App and connection setup
  */
@@ -25,42 +22,11 @@ const db = mysql.createConnection({
   database: "magisdb",
 });
 
-/*
-// this is all sample code
-app.get("/api/test", (req, res) => {
-  db.query("SELECT * FROM book", [], (err, result) => {
-    if (err) console.log(err);
-    res.send(result);
-  });
-});
-
-app.get("/api/test/:category", (req, res) => {
-  db.query(
-    "SELECT * FROM book WHERE category=?",
-    [req.params.category],
-    (err, result) => {
-      if (err) console.log(err);
-      res.status(200);
-      res.send(result);
-      res.end();
-    }
-  );
-});
-
-app.get("/api/html", (req, res) => {
-  db.query("SELECT * FROM author", [], (err, result) => {
-    if (err) console.log(err);
-    res.send(result);
-  });
-});
-// end of sample code
-*/
-
-const sampmsg = { message: "ok" };
-
 /**
  * Helper functions
  */
+const sampmsg = { message: "ok" };
+
 function set_json(res) {
   res.status(200).setHeader("content-type", "application/json");
   return res;
@@ -200,7 +166,6 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
   SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost
   FROM flight f, route r
   WHERE f.routeid = r.routeid
-  AND r.origin = "Manila"
   AND (
     (f.deptime >= "2022-12-22 00:00:00" AND f.deptime < "2022-12-23 00:00:00")
     OR (f.arrivetime >= "2022-12-22 00:00:00" AND f.arrivetime < "2022-12-23 00:00:00")
