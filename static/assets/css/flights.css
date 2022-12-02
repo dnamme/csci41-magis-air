@@ -1,184 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Sarala:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sarala:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;700&display=swap");
 
-body{
-    background-image: url(./../images/flights/bg.png);
-    object-fit: cover;
-}
-    
-a{
-    text-decoration: none;
-    color: var(--secondary-alt);
+body {
+  background-image: url(./../images/flights/bg.png);
+  object-fit: cover;
 }
 
-li{
-    list-style: none;
+a {
+  text-decoration: none;
+  color: var(--secondary-alt);
+}
+
+li {
+  list-style: none;
 }
 /* everything in header */
-nav{
-    padding: 0 96px;
+nav {
+  padding: 0 96px;
 }
 
-#logo{
-    height: 64px;
+#logo {
+  height: 64px;
 }
 
-nav ul{
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100px;
+nav ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100px;
 }
 
 nav #logo-container {
-    margin: 0 auto 0 0;
-  }
-
-nav ul li{
-    float: left;
-    display: inline;
-    list-style-type: none;
+  margin: 0 auto 0 0;
 }
 
-nav ul li a{
-    margin: 0 48px;
-    color: var(--secondary-alt);
-    font-size: var(--h3);
-    font-family: Alexandria, sans-serif;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
+nav ul li {
+  float: left;
+  display: inline;
+  list-style-type: none;
+}
+
+nav ul li a {
+  margin: 0 48px;
+  color: var(--secondary-alt);
+  font-size: var(--h3);
+  font-family: Alexandria, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
 }
 
 /* filter buttons */
 
-#filter{
-    padding: 64px 256px 0px;
+#filter {
+  padding: 64px 256px 0px;
 }
 
 #flight-type {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#flight-type button{
-    color: var(--gray);
-    font-size: var(--body);
-    font-family: Sarala, sans-serif;
-    font-weight: bold;
+#flight-type button {
+  color: var(--gray);
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+  font-weight: bold;
 }
 
-#flight-type .frosted{
-    background-color: #FFFFFF;
-    padding: 8px 32px;
-    margin: 0 11.2px 0 0;
-    height: 42px;
-    cursor: pointer;
-    outline: none;
-    border: none;
+#flight-type .frosted {
+  background-color: #ffffff;
+  padding: 8px 32px;
+  margin: 0 11.2px 0 0;
+  height: 42px;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
-
-#flight-type button.active, button:hover{
-    color: var(--secondary-alt);
+#flight-type button.active,
+button:hover {
+  color: var(--secondary-alt);
 }
 
 /* search */
-#search-flight{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 16px 0;
+#search-flight {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16px 0;
 }
 
 #search-flight label {
-    color: black;
-    font-family: Sarala, sans-serif;
-    font-size: var(--body);
-    font-weight: bold;
-    text-transform: uppercase;
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 #search-flight input[type="search"] {
-    border: none;
-    background: none;
-    background-color: none !important;
-    box-shadow: none;
-  
-    color: black;
-    font-family: Sarala, sans-serif;
-    font-size: var(--body);
-    font-weight: normal;
-  
-    width: 100%;
+  border: none;
+  background: none;
+  background-color: none !important;
+  box-shadow: none;
+
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: normal;
+
+  width: 100%;
 }
 
-#search-flight .frosted{
-    background-color: #FFFFFF;
-    padding: 11.2px 32px;
-    margin: 0 16px 0 0;
-    width: 240px;
+#search-flight .frosted {
+  background-color: #ffffff;
+  padding: 11.2px 32px;
+  margin: 0 16px 0 0;
+  width: 240px;
 }
 
-.continue-container{
-    background-color: var(--secondary-main);
-    padding: 11.2px 16px;
-    cursor: pointer;
-    outline: none;
-    border: none;
+.continue-container {
+  background-color: var(--secondary-main);
+  padding: 11.2px 16px;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }
 
 /* the schedule itself */
 
-#flight-schedule{
-    background-color:#FFFFFF;
-    backdrop-filter: blur(24px);
-    margin: 0px 150px 118px;
+#flight-schedule {
+  background-color: #ffffff;
+  backdrop-filter: blur(24px);
+  margin: 0px 150px 118px;
 }
 
-#flight-schedule span{
-    font-size: var(--body);
-    font-family: Sarala, sans-serif;
-    font-weight: bold;
-    padding: 30px;
+#flight-schedule span {
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+  font-weight: bold;
+  padding: 30px;
 }
 
-#flight-rows{
-    padding: 0px 128px 54px 128px;
-    display: flex;
-    flex-direction: column;
+#flight-rows {
+  padding: 0px 128px 54px 128px;
+  display: flex;
+  flex-direction: column;
 }
 
-.row{
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 16px;
-    margin: 8px 0;
+.row {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 16px;
+  margin: 8px 0;
 }
 
 /* footer */
 
 footer {
-    background-color: black;
-  
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: center;
-  
-    padding: 0 128px;
-    min-height: 80px;
-  }
-  
-  footer #logo {
-    height: 48px;
-  }
-  
-  footer span {
-    color: white;
-    font-size: var(--body-s);
-    text-align: right;
-  }
+  background-color: black;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 128px;
+  min-height: 80px;
+}
+
+footer #logo {
+  height: 48px;
+}
+
+footer span {
+  color: white;
+  font-size: var(--body-s);
+  text-align: right;
+}
