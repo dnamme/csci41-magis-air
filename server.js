@@ -128,8 +128,7 @@ app.post("/api/message", (req, res) => {
   } else if (req.body.name && req.body.name && req.body.message) {
     key = "body";
   } else {
-    send_error(res, "No name, email, or message!");
-    return;
+    return send_error(res, "No name, email, or message!");
   }
 
   set_json(res).send({
@@ -160,7 +159,6 @@ app.post("/api/message", (req, res) => {
   ORDER BY f.deptime ASC
   LIMIT 3;
 */
-
 app.get("/api/upcoming/departures", async (req, res) => {
   const ct_string = format_date(Date.now());
 
@@ -181,55 +179,105 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
     "SELECT f.arrivetime time, r.destination city, f.code flight FROM flight f, route r WHERE f.arrivetime >= ? AND f.routeid = r.routeid ORDER BY f.arrivetime ASC LIMIT 3",
     [ct_string],
     (err, result) => {
-      if (err) console.log(err);
+      if (err) send_error(res, error);
       else res.status(200).send(result);
     }
   );
 });
 
-// todo
-app.get("/api/flights/:mode/:year/:month/:day/:from/:to", (req, res) => {
-  // mode = 0b01 = 1 = arrivals only
-  // mode = 0b10 = 2 = departures only
-  // mode = 0b11 = 3 = both departures and arrivals
-  set_json(res).send({
-    mode: req.params.mode,
-    from: req.params.from,
-    to: req.params.to,
-    year: req.params.year,
-    month: req.params.month,
-    day: req.params.day,
-  });
+/*
+  getting flights
 
-  let query = "SELECT ... FROM ...";
-  if (req.params.mode == 3) {
-    query = "";
-  } else {
-    //
+  SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost
+  FROM flight f, route r
+  WHERE f.routeid = r.routeid
+  AND (
+    (f.deptime >= "2022-12-22 00:00:00" AND f.deptime < "2022-12-23 00:00:00")
+    OR (f.arrivetime >= "2022-12-22 00:00:00" AND f.arrivetime < "2022-12-23 00:00:00")
+  )
+  ORDER BY LEAST(f.deptime, f.arrivetime) ASC;
+
+  SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost
+  FROM flight f, route r
+  WHERE f.routeid = r.routeid
+  AND r.origin = "Manila"
+  AND (
+    (f.deptime >= "2022-12-22 00:00:00" AND f.deptime < "2022-12-23 00:00:00")
+    OR (f.arrivetime >= "2022-12-22 00:00:00" AND f.arrivetime < "2022-12-23 00:00:00")
+  )
+  ORDER BY LEAST(f.deptime, f.arrivetime) ASC;
+
+  SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, f.cost
+  FROM flight f, route r
+  WHERE f.routeid = r.routeid
+  AND (
+    (f.deptime >= "2010-01-01 00:00:00" AND f.deptime < "2010-01-02 00:00:00")
+    OR (f.arrivetime >= "2010-01-01 00:00:00" AND f.deptime < "2010-01-02 00:00:00")
+  )
+  AND r.origin = "Manila"
+  AND r.destination = "Beijing"
+  ORDER BY LEAST(f.deptime, f.arrivetime) ASC
+*/
+app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
+  if (!["all", "departures", "arrivals"].includes(req.params.mode)) {
+    return send_error(res, "Invalid mode");
   }
 
-  /*
+  let c = new Date(
+    req.params.year,
+    req.params.month - 1,
+    req.params.day,
+    0,
+    0,
+    0
+  );
+  let n = new Date(
+    req.params.year,
+    req.params.month - 1,
+    req.params.day,
+    0,
+    0,
+    0
+  );
+  n.setDate(n.getDate() + 1);
 
-  SELECT ... FROM ... WHERE
-    (
-      ARRIVAL DATE IS IN RANGE OF DATE
-      CITY ID = :from // add if :from is not null
-    )
-    OR
-    (
-      DEPARTURE DATE IS IN RANGE OF DATE
-      CITY ID = :to // add if :to is not null
-    )
+  let cdate = format_date(c);
+  let ndate = format_date(n);
 
-  SELECT ... FROM ... WHERE
-    ()
+  let query =
+    "SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, f.cost FROM flight f, route r WHERE f.routeid = r.routeid AND (";
+  let q_loc = "";
+  let params = [];
+  let p_loc = [];
 
-  SELECT ... FROM ... WHERE
-    ()
-    AND
-    ()
+  if (req.params.mode === "departures" || req.params.mode === "all") {
+    query += "(f.deptime >= ? AND f.deptime < ?)";
+    if (req.params.mode === "all") query += " OR ";
+    params.push(cdate, ndate);
 
-  */
+    if (req.query.from) {
+      q_loc += " AND r.origin = ?";
+      p_loc.push(req.query.from);
+    }
+  }
+
+  if (req.params.mode === "arrivals" || req.params.mode === "all") {
+    query += "(f.arrivetime >= ? AND f.deptime < ?)";
+    params.push(cdate, ndate);
+
+    if (req.query.to) {
+      q_loc += " AND r.destination = ?";
+      p_loc.push(req.query.to);
+    }
+  }
+
+  query += ")" + q_loc + " ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
+  params.push(...p_loc);
+
+  db.query(query, params, (err, result) => {
+    if (err) send_error(res, err);
+    else res.status(200).send(result);
+  });
 });
 
 // todo
