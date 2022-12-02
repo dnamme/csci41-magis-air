@@ -72,10 +72,6 @@
   text-align: center;
 }
 
-#content p {
-  font-size: var(--body-l);
-}
-
 #content #desc {
   grid-area: desc;
 
@@ -85,6 +81,10 @@
 
 #content #desc h1 {
   margin: 0 0 24px;
+}
+
+#content #desc p {
+  font-size: var(--body-l);
 }
 
 #content #members {
@@ -102,6 +102,10 @@
 
 #content #members h2 {
   grid-column: 1 / -1;
+}
+
+#content #members p {
+  font-size: var(--body);
 }
 
 #content #contact-form {
