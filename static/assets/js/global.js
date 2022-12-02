@@ -22,7 +22,7 @@ const months = [
   "December",
 ];
 
-function format_date(raw, format) {
+function format_date(raw, format = "MM/DD/YYYY") {
   let dt = new Date(raw);
 
   format = format.replaceAll("YYYY", dt.getFullYear());
@@ -30,13 +30,14 @@ function format_date(raw, format) {
 
   format = format.replaceAll("MMM", months[dt.getMonth()]);
   format = format.replaceAll("mmm", months[dt.getMonth()].slice(0, 3));
-  format = format.replaceAll("MM", dt.getMonth().toString().padStart(2, "0"));
-  format = format.replaceAll("mm", dt.getMonth());
+  format = format.replaceAll(
+    "MM",
+    (dt.getMonth() + 1).toString().padStart(2, "0")
+  );
+  format = format.replaceAll("mm", dt.getMonth() + 1);
 
   format = format.replaceAll("DD", dt.getDate().toString().padStart(2, "0"));
   format = format.replaceAll("dd", dt.getDate());
-
-  console.log(format);
 
   return format;
 }
