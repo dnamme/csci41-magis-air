@@ -120,7 +120,6 @@ app.get("/admin", (req, res) => {
 /**
  * API
  */
-
 app.post("/api/message", (req, res) => {
   let key = null;
 
