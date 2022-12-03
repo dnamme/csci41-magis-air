@@ -113,7 +113,17 @@ function updateTable() {
         board.appendChild(row);
       });
     })
-    .catch((err) => showNotification(err));
+    .catch((err) => {
+      const board = document.querySelector("#flight-schedule");
+      board.innerHTML = "";
+
+      let text = document.createElement("p");
+      text.innerText = "An error has occurred";
+
+      board.append(text);
+
+      showNotification(err);
+    });
 }
 
 function init() {
