@@ -10,8 +10,73 @@
     <link rel="icon" href="./assets/images/icon.png" />
 
     <link rel="stylesheet" href="./assets/css/global.css" />
+    <link rel="stylesheet" href="./assets/css/booking.css" />
   </head>
   <body>
-    BOOKING
+    <header>
+      <nav class="nav dark">
+        <ul>
+          <li id="logo-container">
+            <a href="./">
+              <img src="./assets/images/logo-black.svg" id="logo" />
+            </a>
+          </li>
+          <li><a href="./routes">Routes</a></li>
+          <li><a href="./flights">Flights</a></li>
+          <li><a href="./booking">Booking</a></li>
+          <li><a href="./about">About</a></li>
+          <li><a href="./admin">Admin</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="filters">
+      <h2>Where would you like to go?</h2>
+
+      <div id="search-flight">
+        <div class="frosted field">
+          <label for="from">From</label>
+          <input
+            type="search"
+            name="from"
+            id="from"
+            placeholder="Any location"
+          />
+        </div>
+
+        <div class="frosted field">
+          <label for="to">To</label>
+          <input type="search" name="to" id="to" placeholder="Any location" />
+        </div>
+
+        <div class="frosted field">
+          <label for="date">Date</label>
+          <input type="date" name="date" id="date" placeholder="Date" />
+        </div>
+
+        <button class="continue-container" onclick="onFilterClick()">
+          <img id="continue" src="./assets/images/continue.svg" />
+        </button>
+      </div>
+    </div>
+
+    <div id="results-wrapper">
+      <div id="flight-details">
+        <p>Select your departing flight</p>
+        <span id="origin-city" class="city">Manila</span> (<span
+          id="origin-country"
+          class="country"
+          >Philippines</span
+        >)
+        <img src="./assets/images/airplane-0-black.svg" alt="" />
+        <span id="destination-city" class="city">New York</span> (<span
+          id="destination-country"
+          class="country"
+          >United Stated of America</span
+        >)
+      </div>
+
+      <div id="results"></div>
+    </div>
   </body>
 </html>

@@ -261,3 +261,45 @@ footer span {
 .notification img {
   cursor: pointer;
 }
+
+/* fields */
+.field label {
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.field input[type="search"] {
+  border: none;
+  background: none;
+  background-color: none !important;
+  box-shadow: none;
+
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: normal;
+
+  width: 100%;
+}
+
+.field {
+  background-color: #ffffff80;
+  padding: 12px 32px;
+  margin: 0 16px 0 0;
+  width: 256px;
+}
+
+.field input[type="date"] {
+  display: block;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+
+  color: black;
+  font-family: Sarala, sans-serif;
+  font-size: var(--body);
+  font-weight: normal;
+}

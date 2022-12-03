@@ -1,0 +1,74 @@
+body {
+  background-image: url(./../images/booking/1.png);
+  background-size: cover;
+  background-position: center;
+}
+
+#filters {
+  margin: 48px auto;
+  padding: 0 64px;
+
+  width: 1200px;
+}
+
+#filters h2 {
+  margin: 0 0 24px;
+}
+
+#search-flight {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.continue-container {
+  background-color: var(--secondary-main);
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+  width: 76px;
+  height: 76px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+/* results */
+#results-wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+#results-wrapper #flight-details > p {
+  color: black;
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+
+  margin: 0 0 4px;
+}
+
+#results-wrapper #flight-details {
+  color: black;
+  font-size: var(--h2);
+  font-family: Alexandria, sans-serif;
+
+  margin: 0 64px;
+}
+
+#results-wrapper #flight-details .city {
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+
+#results-wrapper #flight-details .country {
+  font-family: inherit;
+}
+
+#results-wrapper #flight-details > img {
+  vertical-align: middle;
+  margin: 0 8px;
+}

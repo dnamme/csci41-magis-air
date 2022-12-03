@@ -53,47 +53,6 @@ button:hover {
   padding: 16px 0;
 }
 
-#search-flight label {
-  color: black;
-  font-family: Sarala, sans-serif;
-  font-size: var(--body);
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-#search-flight input[type="search"] {
-  border: none;
-  background: none;
-  background-color: none !important;
-  box-shadow: none;
-
-  color: black;
-  font-family: Sarala, sans-serif;
-  font-size: var(--body);
-  font-weight: normal;
-
-  width: 100%;
-}
-
-#search-flight .frosted {
-  background-color: #ffffff80;
-  padding: 11.2px 32px;
-  margin: 0 16px 0 0;
-  width: 240px;
-}
-
-#search-flight input[type="date"] {
-  display: block;
-  border: none;
-  background-color: transparent;
-  width: 100%;
-
-  color: black;
-  font-family: Sarala, sans-serif;
-  font-size: var(--body);
-  font-weight: normal;
-}
-
 .continue-container {
   background-color: var(--secondary-main);
   cursor: pointer;
