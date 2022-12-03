@@ -157,7 +157,7 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
     "SELECT f.arrivetime time, r.destination city, f.code flight FROM flight f, route r WHERE f.arrivetime >= ? AND f.routeid = r.routeid ORDER BY f.arrivetime ASC LIMIT 3",
     [ct_string],
     (err, result) => {
-      if (err) send_error(res, error);
+      if (err) send_error(res, err);
       else res.status(200).send(result);
     }
   );
