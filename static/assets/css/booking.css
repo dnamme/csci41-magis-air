@@ -48,7 +48,7 @@ body {
   display: block;
 }
 
-#results-wrapper #flight-details > p {
+#results-wrapper #flight-details > p:not(#details) {
   color: black;
   font-size: var(--body);
   font-family: Sarala, sans-serif;
@@ -64,17 +64,25 @@ body {
   margin: 0 64px 16px;
 }
 
-#results-wrapper #flight-details .city {
+#results-wrapper #flight-details #details {
+  display: none;
+}
+
+#results-wrapper #flight-details #details.active {
+  display: block;
+}
+
+#results-wrapper #flight-details #details .city {
   font-weight: bold;
   font-family: inherit;
   text-transform: uppercase;
 }
 
-#results-wrapper #flight-details .country {
+#results-wrapper #flight-details #details .country {
   font-family: inherit;
 }
 
-#results-wrapper #flight-details > img {
+#results-wrapper #flight-details #details > img {
   vertical-align: middle;
   margin: 0 8px;
 }

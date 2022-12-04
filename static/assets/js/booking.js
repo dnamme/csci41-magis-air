@@ -34,9 +34,30 @@ function onFilterClick() {
         text.innerText = "No flights found";
 
         board.append(text);
+
+        document
+          .querySelector("#results-wrapper #flight-details #details")
+          .classList.remove("active");
       }
 
-      data.forEach((flight) => {
+      data.forEach((flight, i) => {
+        if (i == 0) {
+          document
+            .querySelector("#results-wrapper #flight-details #details")
+            .classList.add("active");
+
+          document.querySelector("#results-wrapper #origin-city").innerText =
+            flight.origincity;
+          document.querySelector("#results-wrapper #origin-country").innerText =
+            flight.origincountry;
+          document.querySelector(
+            "#results-wrapper #destination-city"
+          ).innerText = flight.destinationcity;
+          document.querySelector(
+            "#results-wrapper #destination-country"
+          ).innerText = flight.destinationcountry;
+        }
+
         // row
         let row = document.createElement("a");
         row.href = `./book/flight/${flight.id}`;
