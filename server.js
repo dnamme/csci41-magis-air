@@ -95,6 +95,10 @@ app.get("/admin", (req, res) => {
   send_file(res, "./static/admin.html");
 });
 
+app.get("/error", (req, res) => {
+  send_file(res, "./static/404.html");
+});
+
 /**
  * API
  */
@@ -268,6 +272,19 @@ app.get("/api/flight/:id", (req, res) => {
       else res.status(200).send(result);
     }
   );
+});
+
+/**
+ * 404 errors
+ */
+app.get("/api/*", (req, res) => {
+  set_json(res).send({
+    message: "Endpoint does not exist",
+  });
+});
+
+app.get("*", (req, res) => {
+  send_file(res, "./static/404.html");
 });
 
 /**
