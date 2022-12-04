@@ -303,3 +303,43 @@ footer span {
   font-size: var(--body);
   font-weight: normal;
 }
+
+/* row */
+.table-row {
+  background-color: white;
+  padding: 0 32px;
+  min-height: 64px;
+
+  display: grid;
+  grid-template-columns: 4fr 8fr 6fr min-content 6fr 8fr 5fr 4fr;
+  align-items: center;
+  column-gap: 24px;
+
+  color: black;
+  text-decoration: none;
+}
+
+.table-row:not(:last-of-type) {
+  margin-bottom: 12px;
+}
+
+.table-row .code {
+  font-weight: bold;
+}
+
+.table-row .city {
+  text-align: center;
+}
+
+.table-row .time {
+  text-align: center;
+}
+
+.table-row .duration {
+  text-align: center;
+}
+
+.table-row .cost {
+  font-weight: bold;
+  text-align: right;
+}

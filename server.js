@@ -71,19 +71,19 @@ app.get("/flights", (req, res) => {
   send_file(res, "./static/flights.html");
 });
 
-app.get("/booking", (req, res) => {
+app.get("/book", (req, res) => {
   send_file(res, "./static/booking.html");
 });
 
-app.get("/booking/flight/:id", (req, res) => {
+app.get("/book/flight/:id", (req, res) => {
   send_file(res, "./static/booking-forms.html");
 });
 
-app.get("/booking/review", (req, res) => {
+app.get("/book/review", (req, res) => {
   send_file(res, "./static/booking-review.html");
 });
 
-app.get("/booking/success", (req, res) => {
+app.get("/book/success", (req, res) => {
   send_file(res, "./static/booking-success.html");
 });
 
@@ -184,15 +184,17 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
   )
   ORDER BY LEAST(f.deptime, f.arrivetime) ASC;
 
-  SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, f.cost
-  FROM flight f, route r
+  SELECT f.code, CONCAT(r.origin, ", ", c1.country) origin, f.deptime, CONCAT(r.destination, ", ", c2.country) destination, f.arrivetime, f.cost
+  FROM flight f, route r, city c1, city c2
   WHERE f.routeid = r.routeid
   AND (
     (f.deptime >= "2010-01-01 00:00:00" AND f.deptime < "2010-01-02 00:00:00")
     OR (f.arrivetime >= "2010-01-01 00:00:00" AND f.deptime < "2010-01-02 00:00:00")
   )
   AND r.origin = "Manila"
+  AND r.origin = c1.cityname
   AND r.destination = "Beijing"
+  AND r.destination = c2.cityname
   ORDER BY LEAST(f.deptime, f.arrivetime) ASC
 */
 app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
@@ -222,7 +224,7 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   let ndate = format_date(n);
 
   let query =
-    "SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r WHERE f.routeid = r.routeid AND (";
+    'SELECT f.flightid id, f.code, CONCAT(r.origin, ", ", c1.country) origin, f.deptime, CONCAT(r.destination, ", ", c2.country) destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r, city c1, city c2 WHERE f.routeid = r.routeid AND (';
   let params = [];
 
   if (req.params.mode === "departures" || req.params.mode === "all") {
@@ -248,7 +250,8 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
     params.push(req.query.to);
   }
 
-  query += " ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
+  query +=
+    " AND r.origin = c1.cityname AND r.destination = c2.cityname ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
 
   db.query(query, params, (err, result) => {
     if (err) send_error(res, err);

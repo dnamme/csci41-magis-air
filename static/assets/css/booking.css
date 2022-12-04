@@ -55,7 +55,7 @@ body {
   font-size: var(--h2);
   font-family: Alexandria, sans-serif;
 
-  margin: 0 64px;
+  margin: 0 64px 16px;
 }
 
 #results-wrapper #flight-details .city {
@@ -71,4 +71,18 @@ body {
 #results-wrapper #flight-details > img {
   vertical-align: middle;
   margin: 0 8px;
+}
+
+#results-wrapper #results {
+  background-color: #ffffff80;
+  margin: 0 auto 96px;
+  padding: 24px 64px;
+  width: 1200px;
+
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+#results-wrapper #results > p {
+  font-weight: bold;
 }

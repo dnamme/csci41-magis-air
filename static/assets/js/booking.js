@@ -1,32 +1,15 @@
-let c_mode;
+function onFilterClick() {
+  let from = document.querySelector("#filters #from").value.trim();
+  let to = document.querySelector("#filters #to").value.trim();
+  let date = new Date(document.querySelector("#filters #date").value);
 
-function onFilterClick(mode = null) {
-  if (mode) c_mode = mode;
+  // if (!from || !to || !document.querySelector("#filters #date").value)
+  if (!document.querySelector("#filters #date").value)
+    return showNotification("Please fill up all the required fields");
 
-  let buttons = document.querySelectorAll("#flight-type button");
-  buttons.forEach((b) => {
-    b.classList.remove("active");
-    if (b.id == c_mode) b.classList.add("active");
-  });
-
-  updateTable();
-}
-
-function updateTable() {
-  const mode = {
-    "all-flights": "all",
-    "departures-only": "departures",
-    "arrivals-only": "arrivals",
-  }[c_mode];
-
-  let date = new Date(document.querySelector("#search-flight #date").value);
-
-  let url = `./api/flights/${mode}/${date.getFullYear()}/${
+  let url = `./api/flights/all/${date.getFullYear()}/${
     date.getMonth() + 1
   }/${date.getDate()}`;
-
-  let from = document.querySelector("#search-flight #from").value.trim();
-  let to = document.querySelector("#search-flight #to").value.trim();
 
   if (from) url += `?from=${from}`;
   if (to) {
@@ -40,8 +23,8 @@ function updateTable() {
     .then(stat)
     .then(json)
     .then((data) => {
-      // empty out schedule
-      const board = document.querySelector("#flight-schedule");
+      // empty out
+      const board = document.querySelector("#results");
       board.innerHTML = "";
 
       if (data.length === 0) {
@@ -53,7 +36,8 @@ function updateTable() {
 
       data.forEach((flight) => {
         // row
-        let row = document.createElement("div");
+        let row = document.createElement("a");
+        row.href = `./booking/flight/${flight.id}`;
         row.classList.add("table-row");
 
         // code
@@ -112,27 +96,12 @@ function updateTable() {
           duration,
           cost
         );
+
+        // let anchor = document.createElement("a");
+        // anchor.href = `./booking/flight/${flight.id}`;
+        // anchor.append(row);
+        // board.appendChild(anchor);
         board.appendChild(row);
       });
-    })
-    .catch((err) => {
-      const board = document.querySelector("#flight-schedule");
-      board.innerHTML = "";
-
-      let text = document.createElement("p");
-      text.innerText = "An error has occurred";
-
-      board.append(text);
-
-      showNotification(err);
     });
-}
-
-function init() {
-  // set date
-  const date_elem = document.querySelector("#search-flight #date");
-  date_elem.value = new Date().toISOString().substring(0, 10);
-
-  // show all flights
-  onFilterClick("all-flights");
 }
