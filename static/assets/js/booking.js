@@ -97,10 +97,6 @@ function onFilterClick() {
           cost
         );
 
-        // let anchor = document.createElement("a");
-        // anchor.href = `./booking/flight/${flight.id}`;
-        // anchor.append(row);
-        // board.appendChild(anchor);
         board.appendChild(row);
       });
     });
