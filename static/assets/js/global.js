@@ -60,7 +60,7 @@ function showNotification(msg) {
   text.innerText = msg;
 
   let close = document.createElement("img");
-  close.setAttribute("src", "./assets/images/close-rounded.svg");
+  close.setAttribute("src", "/assets/images/close-rounded.svg");
   close.onclick = () => document.body.removeChild(cont);
 
   cont.appendChild(text);
