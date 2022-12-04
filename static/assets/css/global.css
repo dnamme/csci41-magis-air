@@ -316,6 +316,7 @@ footer span {
   column-gap: 24px;
 
   color: black;
+  font-size: var(--body);
   text-decoration: none;
 }
 

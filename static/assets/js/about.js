@@ -15,7 +15,7 @@ function onSendMessage() {
     message: document.querySelector("#contact-form #message").value,
   };
 
-  fetch("./api/message", {
+  fetch("/api/message", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

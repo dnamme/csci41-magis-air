@@ -21,7 +21,7 @@ function updateTable() {
 
   let date = new Date(document.querySelector("#search-flight #date").value);
 
-  let url = `./api/flights/${mode}/${date.getFullYear()}/${
+  let url = `/api/flights/${mode}/${date.getFullYear()}/${
     date.getMonth() + 1
   }/${date.getDate()}`;
 
@@ -76,7 +76,7 @@ function updateTable() {
 
         // airplane
         let airplane = document.createElement("img");
-        airplane.src = "./assets/images/airplane-45-black.svg";
+        airplane.src = "/assets/images/airplane-45-black.svg";
 
         // arrival time
         let arrivetime = document.createElement("p");

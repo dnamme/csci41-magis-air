@@ -3,3 +3,43 @@ body {
   background-size: cover;
   background-position: center;
 }
+
+#flight-details {
+  width: 1200px;
+  margin: 0 auto;
+
+  color: black;
+  font-size: var(--h2);
+  font-family: Alexandria, sans-serif;
+
+  margin: 48px auto 16px;
+  padding: 0 64px;
+}
+
+#flight-details .text {
+  padding: 0 24px;
+  margin: 0 0 16px;
+}
+
+#flight-details .text > p {
+  color: black;
+  font-size: var(--body);
+  font-family: Sarala, sans-serif;
+
+  margin: 0 0 4px;
+}
+
+#flight-details .text .city {
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+
+#flight-details .text .country {
+  font-family: inherit;
+}
+
+#flight-details .text > img {
+  vertical-align: middle;
+  margin: 0 8px;
+}

@@ -34,7 +34,7 @@ window.onload = () => {
   );
 
   for (let i = 0; i < 2; i++) {
-    fetch(`./api/upcoming/${keys[i].toLowerCase()}`)
+    fetch(`/api/upcoming/${keys[i].toLowerCase()}`)
       .then(stat)
       .then(json)
       .then((data) => {

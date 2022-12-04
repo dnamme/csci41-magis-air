@@ -7,7 +7,7 @@ function onFilterClick() {
     // if (!document.querySelector("#filters #date").value)
     return showNotification("Please fill up all the required fields");
 
-  let url = `./api/flights/all/${date.getFullYear()}/${
+  let url = `/api/flights/all/${date.getFullYear()}/${
     date.getMonth() + 1
   }/${date.getDate()}`;
 
@@ -60,7 +60,7 @@ function onFilterClick() {
 
         // row
         let row = document.createElement("a");
-        row.href = `./book/flight/${flight.id}`;
+        row.href = `/book/flight/${flight.id}`;
         row.classList.add("table-row");
 
         // code
@@ -83,7 +83,7 @@ function onFilterClick() {
 
         // airplane
         let airplane = document.createElement("img");
-        airplane.src = "./assets/images/airplane-45-black.svg";
+        airplane.src = "/assets/images/airplane-45-black.svg";
 
         // arrival time
         let arrivetime = document.createElement("p");
@@ -122,5 +122,9 @@ function onFilterClick() {
 
         board.appendChild(row);
       });
+    })
+    .catch((err) => {
+      showNotification(err);
+      console.log(err);
     });
 }

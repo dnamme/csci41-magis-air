@@ -259,11 +259,15 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   });
 });
 
-// todo
 app.get("/api/flight/:id", (req, res) => {
-  set_json(res).send({
-    id: req.params.id,
-  });
+  db.query(
+    "SELECT f.flightid id, f.code, r.origin origincity, c1.country origincountry, f.deptime, r.destination destinationcity, c2.country destinationcountry, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r, city c1, city c2 WHERE f.routeid = r.routeid AND f.flightid = ? AND r.origin = c1.cityname AND r.destination = c2.cityname",
+    [req.params.id],
+    (err, result) => {
+      if (err) send_error(res, err);
+      else res.status(200).send(result);
+    }
+  );
 });
 
 /**
