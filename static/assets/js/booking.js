@@ -37,7 +37,7 @@ function onFilterClick() {
       data.forEach((flight) => {
         // row
         let row = document.createElement("a");
-        row.href = `./booking/flight/${flight.id}`;
+        row.href = `./book/flight/${flight.id}`;
         row.classList.add("table-row");
 
         // code
