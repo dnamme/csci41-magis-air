@@ -3,8 +3,8 @@ function onFilterClick() {
   let to = document.querySelector("#filters #to").value.trim();
   let date = new Date(document.querySelector("#filters #date").value);
 
-  // if (!from || !to || !document.querySelector("#filters #date").value)
-  if (!document.querySelector("#filters #date").value)
+  if (!from || !to || !document.querySelector("#filters #date").value)
+    // if (!document.querySelector("#filters #date").value)
     return showNotification("Please fill up all the required fields");
 
   let url = `./api/flights/all/${date.getFullYear()}/${
@@ -27,6 +27,8 @@ function onFilterClick() {
       const board = document.querySelector("#results");
       board.innerHTML = "";
 
+      document.querySelector("#results-wrapper").classList.add("active");
+
       if (data.length === 0) {
         let text = document.createElement("p");
         text.innerText = "No flights found";
@@ -48,7 +50,7 @@ function onFilterClick() {
         // origin
         let origin = document.createElement("p");
         origin.classList.add("city");
-        origin.innerText = flight.origin;
+        origin.innerText = `${flight.origincity}, ${flight.origincountry}`;
 
         // departure time
         let deptime = document.createElement("p");
@@ -73,7 +75,7 @@ function onFilterClick() {
         // destination
         let destination = document.createElement("p");
         destination.classList.add("city");
-        destination.innerText = flight.destination;
+        destination.innerText = `${flight.destinationcity}, ${flight.destinationcountry}`;
 
         // duration
         let duration = document.createElement("p");

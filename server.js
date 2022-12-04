@@ -224,7 +224,7 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   let ndate = format_date(n);
 
   let query =
-    'SELECT f.flightid id, f.code, CONCAT(r.origin, ", ", c1.country) origin, f.deptime, CONCAT(r.destination, ", ", c2.country) destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r, city c1, city c2 WHERE f.routeid = r.routeid AND (';
+    "SELECT f.flightid id, f.code, r.origin origincity, c1.country origincountry, f.deptime, r.destination destinationcity, c2.country destinationcountry, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r, city c1, city c2 WHERE f.routeid = r.routeid AND (";
   let params = [];
 
   if (req.params.mode === "departures" || req.params.mode === "all") {

@@ -64,7 +64,7 @@ function updateTable() {
         // origin
         let origin = document.createElement("p");
         origin.classList.add("city");
-        origin.innerText = flight.origin;
+        origin.innerText = `${flight.origincity}, ${flight.origincountry}`;
 
         // departure time
         let deptime = document.createElement("p");
@@ -89,7 +89,7 @@ function updateTable() {
         // destination
         let destination = document.createElement("p");
         destination.classList.add("city");
-        destination.innerText = flight.destination;
+        destination.innerText = `${flight.destinationcity}, ${flight.destinationcountry}`;
 
         // duration
         let duration = document.createElement("p");

@@ -40,6 +40,12 @@ body {
 #results-wrapper {
   width: 1200px;
   margin: 0 auto;
+
+  display: none;
+}
+
+#results-wrapper.active {
+  display: block;
 }
 
 #results-wrapper #flight-details > p {
