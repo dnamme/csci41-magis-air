@@ -43,3 +43,46 @@ body {
   vertical-align: middle;
   margin: 0 8px;
 }
+
+#flight-form {
+  width: 1200px;
+  margin: 0 auto 96px;
+  padding: 0 64px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+#flight-form .continue-container {
+  align-self: flex-end;
+  margin: 24px 0 0;
+}
+
+#flight-form h2 {
+  margin: 0 24px 16px;
+}
+
+#flight-form .field {
+  width: 100%;
+  margin: 0;
+}
+
+#flight-form .field.notactive {
+  display: none;
+}
+
+#flight-form #passenger-info,
+#flight-form #additional-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 16px;
+  row-gap: 16px;
+
+  margin: 0 0 20px;
+  width: 100%;
+}
+
+#flight-form #additional-items .field.item {
+  grid-column: 1 / 3;
+}

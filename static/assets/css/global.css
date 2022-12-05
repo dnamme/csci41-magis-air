@@ -110,6 +110,21 @@ body {
   backdrop-filter: blur(24px);
 }
 
+.continue-container {
+  background-color: var(--secondary-main);
+  cursor: pointer;
+  outline: none;
+  border: none;
+
+  width: 76px;
+  height: 76px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
 /* loader */
 .lds-ring {
   display: inline-block;
@@ -271,7 +286,9 @@ footer span {
   text-transform: uppercase;
 }
 
-.field input[type="search"] {
+.field input[type="text"],
+.field input[type="search"],
+.field input[type="number"] {
   border: none;
   background: none;
   background-color: none !important;
@@ -290,6 +307,10 @@ footer span {
   padding: 12px 32px;
   margin: 0 16px 0 0;
   width: 256px;
+}
+
+.field ::placeholder {
+  color: var(--gray);
 }
 
 .field input[type="date"] {

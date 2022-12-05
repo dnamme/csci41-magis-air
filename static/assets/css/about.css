@@ -114,17 +114,11 @@
   text-transform: uppercase;
 }
 
+#content #contact-form .field {
+  width: unset;
+}
+
 #content #contact-form input[type="text"] {
-  border: none;
-  background: none;
-  background-color: none !important;
-  box-shadow: none;
-
-  color: black;
-  font-family: Sarala, sans-serif;
-  font-size: var(--body);
-  font-weight: normal;
-
   width: 100%;
 }
 

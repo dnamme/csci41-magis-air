@@ -53,21 +53,6 @@ button:hover {
   padding: 16px 0;
 }
 
-.continue-container {
-  background-color: var(--secondary-main);
-  cursor: pointer;
-  outline: none;
-  border: none;
-
-  width: 76px;
-  height: 76px;
-
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-}
-
 /* the schedule itself */
 
 #flight-schedule {

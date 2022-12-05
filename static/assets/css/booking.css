@@ -21,21 +21,6 @@ body {
   align-items: center;
 }
 
-.continue-container {
-  background-color: var(--secondary-main);
-  cursor: pointer;
-  outline: none;
-  border: none;
-
-  width: 76px;
-  height: 76px;
-
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-}
-
 /* results */
 #results-wrapper {
   width: 1200px;

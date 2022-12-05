@@ -85,3 +85,15 @@ function init() {
       window.location.href = "/error";
     });
 }
+
+// todo
+function onAddAnotherItemClick(event) {
+  event.preventDefault();
+  showNotification("new item");
+}
+
+// todo
+function onSubmitForm(event) {
+  event.preventDefault();
+  showNotification("on submit");
+}
