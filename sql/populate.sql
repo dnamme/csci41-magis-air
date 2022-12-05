@@ -15,11 +15,14 @@ AIRPORT(airportname, airportcapacity, noofterminals, cityid)
 VALUES
 ('Ninoy Aquino International Airport', 250, 4, 1),
 ('Changi Airport', 350, 4, 2),
-('Beijing Capirtal International Airport', 400, 3, 3),
+('Beijing Capital International Airport', 400, 3, 3),
 ('Shanghai Pudong International Airport', 650, 3, 4),
+('Shanghai Hongqiao International Airport', 450, 3, 4),
 ('Narita International Airport', 500, 3, 5),
 ('Los Angeles International Airport', 500, 9, 6),
+('John Wayne Airport', 400, 3, 6),
 ('John F. Kennedy International Airport', 350, 8, 7),
+('Newark Liberty International Airport', 250, 4, 7),
 ('Heathrow Airport', 500, 4, 8);
 
 INSERT INTO
@@ -93,6 +96,66 @@ VALUES
 (44, 2),
 (47, 1),
 (48, 1);
+
+INSERT INTO
+AIRPORT_ROUTE(airportid, routeid)
+VALUES
+(1, 1),
+(1, 3),
+(1, 5),
+(1, 9),
+(1, 13),
+(1, 19),
+(1, 21),
+(1, 27),
+(1, 29),
+(1, 37),
+(1, 39),
+(2, 2),
+(2, 7),
+(2, 11),
+(2, 15),
+(2, 31),
+(3, 4),
+(3, 6),
+(3, 8),
+(3, 23),
+(3, 25),
+(3, 41),
+(3, 43),
+(4, 10),
+(4, 12),
+(4, 17),
+(4, 45),
+(4, 47),
+(5, 10),
+(5, 12),
+(5, 17),
+(6, 14),
+(6, 16),
+(6, 18),
+(6, 33),
+(6, 35),
+(7, 20),
+(7, 22),
+(7, 24),
+(7, 26),
+(8, 20),
+(8, 24),
+(9, 28),
+(9, 30),
+(9, 32),
+(9, 34),
+(9, 36),
+(10, 30),
+(10, 32),
+(10, 36),
+(11, 38),
+(11, 40),
+(11, 42),
+(11, 44),
+(11, 46),
+(11, 48);
 
 INSERT INTO
 FLIGHT(deptime, arrivetime, cost, routeid, code)
@@ -253,10 +316,107 @@ VALUES
 INSERT INTO
 SPASSENGER(spassengerid, seniorcitizenid, discount)
 VALUES
-(4, 001453924270, 0.8),
-(12, 003487529412, 0.8),
-(13, 003763040065, 0.8);
+(4, 3924270, 0.8),
+(12, 7529412, 0.8),
+(13, 3040065, 0.8);
 
+INSERT INTO
+FLIGHTBOOKING(bookingdate, passengerid) 
+VALUES
+('2022-11-28', 1),
+('2022-11-28', 18),
+('2022-11-28', 22),
+('2022-11-28', 15),
+('2022-11-29', 9),
+('2022-11-29', 10),
+('2022-11-29', 11),
+('2022-11-30', 4),
+('2022-11-30', 12),
+('2022-11-30', 13);
+
+INSERT INTO
+FLIGHT_FBOOKING(flightid, bookingno)
+VALUES
+(23, 1),
+(19, 2),
+(24, 3),
+(20, 4),
+(19, 5),
+(19, 6),
+(19, 7),
+(22, 8),
+(21, 9),
+(21, 10);
+
+INSERT INTO
+ADDITIONALITEM(description, quantity, cost)
+VALUES
+('Terminal Fees', 1, 5),
+('Check-in Luggage (5kg)', 1, 30),
+('Check-in Luggage (5kg)', 2, 30),
+('Check-in Luggage (10kg)', 1, 50);
+
+INSERT INTO
+ITEM_FBOOKING(itemid, bookingno)
+VALUES
+(1, 1),
+(4, 1),
+(1, 2),
+(1, 3),
+(2, 3),
+(1, 4),
+(1, 5),
+(3, 5),
+(1, 6),
+(1, 7),
+(2, 1),
+(1, 8),
+(1, 9),
+(2, 9),
+(1, 10);
+
+INSERT INTO
+TRAVELHISTORY(generationdate, passengerid)
+VALUES
+('2022-11-21', 1),
+('2022-11-23', 3),
+('2022-11-27', 15);
+
+INSERT INTO 
+FLIGHT_TRAVELHIST(flightid, travelhistoryid)
+VALUES
+(1, 1),
+(3, 1),
+(5, 1),
+(8, 1),
+(3, 2),
+(7, 2),
+(12, 2),
+(3, 3),
+(6, 3),
+(17, 3);
+
+INSERT INTO
+TICKET_SALES(flightid, soldnumber, periodend)
+VALUES
+(1, 83, '2021-01-30'),
+(2, 21, '1970-01-01'),
+(3, 56, '2010-01-01'),
+(4, 72, '2010-01-23'),
+(5, 61, '2012-01-01'),
+(6, 89, '2012-01-31'),
+(7, 73, '2012-03-14'),
+(8, 54, '2019-01-01'),
+(9, 23, '2021-01-30'),
+(10, 28, '2021-01-30'),
+(11, 46, '2021-01-30'),
+(12, 47, '2021-01-30'),
+(13, 37, '2021-01-30'),
+(14, 76, '2010-01-01'),
+(15, 68, '2010-01-01'),
+(16, 87, '2010-01-02'),
+(17, 91, '2010-01-01'),
+(18, 67, '2010-01-02');
 
 INSERT INTO
 CREW(fname, lname, middleinitial, role)
