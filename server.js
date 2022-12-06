@@ -59,6 +59,11 @@ function format_date(raw, hr = null, min = null, sec = null) {
   }`;
 }
 
+function query_response(res, err, result) {
+  if (err) send_error(res, err);
+  else res.status(200).send(result);
+}
+
 /**
  * Pages
  */
@@ -316,6 +321,14 @@ app.post("/api/city", (req, res) => {
       if (err) send_error(res, err);
       else res.status(200).send(result);
     }
+  );
+});
+
+app.get("/api/passengers", (req, res) => {
+  db.query(
+    'SELECT CONCAT(fname, " ", middleinitial, ". ", lname) name, gender, birthdate FROM passenger ORDER BY lname ASC, fname ASC, middleinitial ASC',
+    [],
+    (err, result) => query_response(res, err, result)
   );
 });
 

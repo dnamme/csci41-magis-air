@@ -341,6 +341,11 @@ footer span {
   text-decoration: none;
 }
 
+.table-row.header {
+  background-color: transparent;
+  font-weight: bold;
+}
+
 .table-row:not(:last-of-type) {
   margin-bottom: 12px;
 }
