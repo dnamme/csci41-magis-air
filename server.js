@@ -301,6 +301,24 @@ app.post("/api/book/:flightid/:passengerid", (req, res) => {
   });
 });
 
+app.get("/api/cities", (req, res) => {
+  db.query("SELECT * FROM city c ORDER BY country ASC", [], (err, result) => {
+    if (err) send_error(res, err);
+    else res.status(200).send(result);
+  });
+});
+
+app.post("/api/city", (req, res) => {
+  db.query(
+    "INSERT INTO city(cityname, country) VALUES (?, ?)",
+    [req.body.cityname, req.body.country],
+    (err, result) => {
+      if (err) send_error(res, err);
+      else res.status(200).send(result);
+    }
+  );
+});
+
 /**
  * 404 errors
  */
