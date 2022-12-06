@@ -171,10 +171,7 @@ app.get("/api/upcoming/departures", async (req, res) => {
   db.query(
     "SELECT f.deptime time, r.origin city, f.code flight FROM flight f, route r WHERE f.deptime >= ? AND f.routeid = r.routeid ORDER BY f.deptime ASC LIMIT 3",
     [ct_string],
-    (err, result) => {
-      if (err) console.log(err);
-      else res.status(200).send(result);
-    }
+    (err, result) => query_response(res, err, result)
   );
 });
 
@@ -184,10 +181,7 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
   db.query(
     "SELECT f.arrivetime time, r.destination city, f.code flight FROM flight f, route r WHERE f.arrivetime >= ? AND f.routeid = r.routeid ORDER BY f.arrivetime ASC LIMIT 3",
     [ct_string],
-    (err, result) => {
-      if (err) send_error(res, err);
-      else res.status(200).send(result);
-    }
+    (err, result) => query_response(res, err, result)
   );
 });
 
@@ -281,20 +275,14 @@ app.get("/api/flights/:mode/:year/:month/:day", (req, res) => {
   query +=
     " AND r.origin = c1.cityname AND r.destination = c2.cityname ORDER BY LEAST(f.deptime, f.arrivetime) ASC";
 
-  db.query(query, params, (err, result) => {
-    if (err) send_error(res, err);
-    else res.status(200).send(result);
-  });
+  db.query(query, params, (err, result) => query_response(res, err, result));
 });
 
 app.get("/api/flight/:id", (req, res) => {
   db.query(
     "SELECT f.flightid id, f.code, r.origin origincity, c1.country origincountry, f.deptime, r.destination destinationcity, c2.country destinationcountry, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost FROM flight f, route r, city c1, city c2 WHERE f.routeid = r.routeid AND f.flightid = ? AND r.origin = c1.cityname AND r.destination = c2.cityname",
     [req.params.id],
-    (err, result) => {
-      if (err) send_error(res, err);
-      else res.status(200).send(result);
-    }
+    (err, result) => query_response(res, err, result)
   );
 });
 
@@ -307,20 +295,16 @@ app.post("/api/book/:flightid/:passengerid", (req, res) => {
 });
 
 app.get("/api/cities", (req, res) => {
-  db.query("SELECT * FROM city c ORDER BY country ASC", [], (err, result) => {
-    if (err) send_error(res, err);
-    else res.status(200).send(result);
-  });
+  db.query("SELECT * FROM city c ORDER BY country ASC", [], (err, result) =>
+    query_response(res, err, result)
+  );
 });
 
 app.post("/api/city", (req, res) => {
   db.query(
     "INSERT INTO city(cityname, country) VALUES (?, ?)",
     [req.body.cityname, req.body.country],
-    (err, result) => {
-      if (err) send_error(res, err);
-      else res.status(200).send(result);
-    }
+    (err, result) => query_response(res, err, result)
   );
 });
 
