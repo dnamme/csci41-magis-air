@@ -84,7 +84,6 @@ CREATE TABLE PASSENGER(
     lname VARCHAR(100),
     middleinitial VARCHAR(3),
     gender VARCHAR(25),
-    age INT,
     birthdate DATE
 );
 
