@@ -1,5 +1,7 @@
+var id;
+
 function init() {
-  let id = window.location.href.split("?")[0].split("/");
+  id = window.location.href.split("?")[0].split("/");
   id = id[id.length - 1];
 
   fetch(`/api/flight/${id}`)
@@ -92,8 +94,33 @@ function onAddAnotherItemClick(event) {
   showNotification("new item");
 }
 
-// todo
 function onSubmitForm(event) {
   event.preventDefault();
-  showNotification("on submit");
+
+  const params = new URLSearchParams();
+
+  let fields = document.querySelectorAll("#flight-form input");
+  let invalid = false;
+  fields.forEach((field) => {
+    if (field.id !== seniorid && !field.value) invalid = true;
+    console.log(field.id + ": " + field.value);
+    params.append(field.id, field.value);
+  });
+
+  if (invalid)
+    return showNotification("Please fill up all the required fields");
+
+  fetch(`/api/book/3/2`, {
+    method: "POST",
+    body: params,
+  })
+    .then(stat)
+    .then(json)
+    .then((data) => {
+      window.location.href = `/book/success/${id}`;
+    })
+    .catch((err) => {
+      showNotification(err);
+      console.log(err);
+    });
 }

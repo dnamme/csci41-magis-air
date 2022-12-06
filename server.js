@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const mysql = require("mysql");
+const bodyParser = require("body-parser");
 
 const app = express();
 /**
@@ -12,7 +13,9 @@ app.use(
     origin: "*",
   }),
   express.json(),
-  express.static("static")
+  express.static("static"),
+  // bodyParser.urlencoded(),
+  bodyParser.urlencoded({ extended: true })
 );
 
 const db = mysql.createConnection({
@@ -83,7 +86,7 @@ app.get("/book/review", (req, res) => {
   send_file(res, "./static/booking-review.html");
 });
 
-app.get("/book/success", (req, res) => {
+app.get("/book/success/:id", (req, res) => {
   send_file(res, "./static/booking-success.html");
 });
 
@@ -272,6 +275,14 @@ app.get("/api/flight/:id", (req, res) => {
       else res.status(200).send(result);
     }
   );
+});
+
+app.post("/api/book/:flightid/:passengerid", (req, res) => {
+  set_json(res).send({
+    flightid: req.params.flightid,
+    passengerid: req.params.passengerid,
+    body: req.body,
+  });
 });
 
 /**
