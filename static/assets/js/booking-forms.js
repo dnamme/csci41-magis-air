@@ -88,10 +88,41 @@ function init() {
     });
 }
 
-// todo
 function onAddAnotherItemClick(event) {
   event.preventDefault();
-  showNotification("new item");
+
+  let items = document.querySelector("#flight-form #additional-items");
+  let index = parseInt(items.dataset.amount) + 1;
+  items.dataset.amount = index;
+
+  let item = document.createElement("div");
+  item.classList.add("frosted", "field", "item");
+
+  let ilabel = document.createElement("label");
+  ilabel.setAttribute("for", `item${index}`);
+  ilabel.innerText = "Item";
+  let iinput = document.createElement("input");
+  iinput.setAttribute("type", "text");
+  iinput.setAttribute("name", `item${index}`);
+  iinput.id = `item${index}`;
+  iinput.setAttribute("placeholder", "--");
+
+  let quant = document.createElement("div");
+  quant.classList.add("frosted", "field", "quantity");
+
+  let qlabel = document.createElement("label");
+  qlabel.setAttribute("for", `item${index}`);
+  qlabel.innerText = "Quantity";
+  let qinput = document.createElement("input");
+  qinput.setAttribute("type", "text");
+  qinput.setAttribute("name", `item${index}`);
+  qinput.id = `item${index}`;
+  qinput.setAttribute("placeholder", "--");
+
+  item.append(ilabel, iinput);
+  quant.append(qlabel, qinput);
+
+  items.append(item, quant);
 }
 
 function onSubmitForm(event) {
