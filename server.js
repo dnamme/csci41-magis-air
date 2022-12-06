@@ -75,11 +75,11 @@ app.get("/book", (req, res) => {
 });
 
 app.get("/book/flight/:id", (req, res) => {
-  send_file(res, "./static/booking-forms.html");
+  send_file(res, "./static/booking/forms.html");
 });
 
 app.get("/book/success/:id", (req, res) => {
-  send_file(res, "./static/booking-success.html");
+  send_file(res, "./static/booking/success.html");
 });
 
 app.get("/about", (req, res) => {
@@ -88,6 +88,30 @@ app.get("/about", (req, res) => {
 
 app.get("/admin", (req, res) => {
   send_file(res, "./static/admin.html");
+});
+
+app.get("/admin/cities", (req, res) => {
+  send_file(res, "./static/admin/cities.html");
+});
+
+app.get("/admin/routes", (req, res) => {
+  send_file(res, "./static/admin/routes.html");
+});
+
+app.get("/admin/flights", (req, res) => {
+  send_file(res, "./static/admin/flights.html");
+});
+
+app.get("/admin/items", (req, res) => {
+  send_file(res, "./static/admin/items.html");
+});
+
+app.get("/admin/crew", (req, res) => {
+  send_file(res, "./static/admin/crew.html");
+});
+
+app.get("/admin/passengers", (req, res) => {
+  send_file(res, "./static/admin/passengers.html");
 });
 
 app.get("/error", (req, res) => {
