@@ -66,10 +66,6 @@ app.get("/", (req, res) => {
   send_file(res, "./static/index.html");
 });
 
-app.get("/routes", (req, res) => {
-  send_file(res, "./static/routes.html");
-});
-
 app.get("/flights", (req, res) => {
   send_file(res, "./static/flights.html");
 });
@@ -80,10 +76,6 @@ app.get("/book", (req, res) => {
 
 app.get("/book/flight/:id", (req, res) => {
   send_file(res, "./static/booking-forms.html");
-});
-
-app.get("/book/review", (req, res) => {
-  send_file(res, "./static/booking-review.html");
 });
 
 app.get("/book/success/:id", (req, res) => {
