@@ -141,17 +141,50 @@ function onSubmitForm(event) {
   if (invalid)
     return showNotification("Please fill up all the required fields");
 
-  fetch(`/api/book/3/2`, {
-    method: "POST",
-    body: params,
-  })
+  fetch(
+    `/api/passenger?firstname=${params.get(
+      "firstname"
+    )}&middleinitial=${params.get("middleinitial")}&lastname=${params.get(
+      "lastname"
+    )}&birthdate=${params.get("birthdate")}`
+  )
     .then(stat)
     .then(json)
     .then((data) => {
-      window.location.href = `/book/success/${id}`;
+      if (data.length) {
+        let passengerid = data[0].passengerid;
+
+        fetch(`/api/book/${id}/${passengerid}`, {
+          method: "POST",
+          body: params,
+        })
+          .then(stat)
+          .then(json)
+          .then((data3) => {
+            window.location.href = `/book/success/${id}`;
+          })
+          .catch((err) => {
+            showNotification(err);
+            console.log(err);
+          });
+      } else {
+        fetch("/api/passenger", {
+          method: "POST",
+          body: params,
+        })
+          .then(stat)
+          .then(json)
+          .then((data2) => {
+            // redo
+            onSubmitForm(event);
+          })
+          .catch((err) => {
+            throw err;
+          });
+      }
     })
     .catch((err) => {
-      showNotification(err);
       console.log(err);
+      showNotification(er);
     });
 }

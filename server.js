@@ -23,6 +23,7 @@ const db = mysql.createConnection({
   host: "localhost",
   password: "",
   database: "magisdb",
+  multipleStatements: true,
 });
 
 /**
@@ -275,11 +276,11 @@ app.get("/api/flight/:id", (req, res) => {
 });
 
 app.post("/api/book/:flightid/:passengerid", (req, res) => {
-  set_json(res).send({
-    flightid: req.params.flightid,
-    passengerid: req.params.passengerid,
-    body: req.body,
-  });
+  db.query(
+    "INSERT INTO FLIGHTBOOKING(bookingdate, totalcost, passengerid) VALUES (?, ?, ?)",
+    [format_date(Date.now()), 300, req.params.passengerid],
+    (err, result) => query_response(res, err, result)
+  );
 });
 
 app.get("/api/cities", (req, res) => {
@@ -300,6 +301,33 @@ app.get("/api/passengers", (req, res) => {
   db.query(
     'SELECT CONCAT(fname, " ", middleinitial, ". ", lname) name, gender, birthdate FROM passenger ORDER BY lname ASC, fname ASC, middleinitial ASC',
     [],
+    (err, result) => query_response(res, err, result)
+  );
+});
+
+app.get("/api/passenger", (req, res) => {
+  db.query(
+    "SELECT * FROM passenger WHERE fname = ? AND middleinitial = ? AND lname = ? AND birthdate = ?",
+    [
+      req.query.firstname,
+      req.query.middleinitial,
+      req.query.lastname,
+      req.query.birthdate,
+    ],
+    (err, result) => query_response(res, err, result)
+  );
+});
+
+app.post("/api/passenger", (req, res) => {
+  db.query(
+    "INSERT INTO passenger(fname, lname, middleinitial, gender, birthdate) VALUES (?, ?, ?, ?, ?)",
+    [
+      req.body.firstname,
+      req.body.lastname,
+      req.body.middleinitial,
+      req.body.gender,
+      req.body.birthdate,
+    ],
     (err, result) => query_response(res, err, result)
   );
 });
