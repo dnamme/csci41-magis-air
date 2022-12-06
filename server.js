@@ -332,6 +332,35 @@ app.get("/api/passengers", (req, res) => {
   );
 });
 
+app.get("/api/crew", (req, res) => {
+  if (req.query.flightcode) {
+    db.query(
+      'SELECT CONCAT(c.fname, " ", c.middleinitial, ". ", c.lname) name, c.role, f.code, r.origin origincity, c1.country origincountry, f.deptime, r.destination destinationcity, c2.country destinationcountry, f.arrivetime FROM crew_assignment ca, crew c, flight f, route r, city c1, city c2 WHERE ca.flightid = f.flightid AND ca.crewid = c.crewid AND f.routeid = r.routeid AND r.origin = c1.cityname AND r.destination = c2.cityname AND f.code = ?',
+      [req.query.flightcode],
+      (err, result) => query_response(res, err, result)
+    );
+  } else {
+    db.query(
+      'SELECT CONCAT(fname, " ", middleinitial, ". ", lname) name, role FROM crew ORDER BY lname ASC, fname ASC, middleinitial ASC',
+      [],
+      (err, result) => query_response(res, err, result)
+    );
+  }
+});
+
+app.post("/api/crew", (req, res) => {
+  db.query(
+    "INSERT INTO crew(fname, lname, middleinitial, role) VALUES (?, ?, ?, ?)",
+    [
+      req.body.firstname,
+      req.body.lastname,
+      req.body.middleinitial,
+      req.body.role,
+    ],
+    (err, result) => query_response(res, err, result)
+  );
+});
+
 /**
  * 404 errors
  */
