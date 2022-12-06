@@ -14,7 +14,6 @@ app.use(
   }),
   express.json(),
   express.static("static"),
-  // bodyParser.urlencoded(),
   bodyParser.urlencoded({ extended: true })
 );
 
@@ -138,15 +137,6 @@ app.post("/api/message", (req, res) => {
 });
 
 /*
-  getting three next flights
-
-  SELECT f.flightid, f.routeid, f.deptime, f.arrivetime, f.cost, r.origin, r.destination, r.flighttype
-  FROM flight f, route r
-  WHERE f.deptime >= "2022-12-02 02:30:57"
-  AND f.routeid = r.routeid
-  ORDER BY f.deptime ASC
-  LIMIT 3;
-
   SELECT f.deptime time, r.origin city, f.code flight
   FROM flight f, route r
   WHERE f.deptime >= "2022-12-02 02:30:57"
@@ -175,17 +165,6 @@ app.get("/api/upcoming/arrivals", async (req, res) => {
 });
 
 /*
-  getting flights
-
-  SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost
-  FROM flight f, route r
-  WHERE f.routeid = r.routeid
-  AND (
-    (f.deptime >= "2022-12-22 00:00:00" AND f.deptime < "2022-12-23 00:00:00")
-    OR (f.arrivetime >= "2022-12-22 00:00:00" AND f.arrivetime < "2022-12-23 00:00:00")
-  )
-  ORDER BY LEAST(f.deptime, f.arrivetime) ASC;
-
   SELECT f.code, r.origin, f.deptime, r.destination, f.arrivetime, TIMEDIFF(f.arrivetime, f.deptime) duration, f.cost
   FROM flight f, route r
   WHERE f.routeid = r.routeid
