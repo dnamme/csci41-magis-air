@@ -1,0 +1,43 @@
+body {
+  background-image: url(./../images/booking/1.png);
+  background-size: cover;
+  background-position: center;
+}
+
+#content {
+  background-color: #ffffff80;
+  width: 1200px;
+  margin: 48px auto 96px;
+  padding: 96px 64px;
+
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
+#content #flight .city {
+  font-weight: bold;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+
+#content #flight .country {
+  font-family: inherit;
+}
+
+#content #flight > img {
+  vertical-align: middle;
+  margin: 0 8px;
+}
+
+#content .text {
+  margin: 0 0 8px;
+}
+
+#content #flight {
+  margin: 0 0 4px;
+}
+
+#content #datetime {
+  margin: 0 0 48px;
+}
