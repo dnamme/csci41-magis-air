@@ -124,6 +124,8 @@ function onAddCrewClick(event) {
     .then((data) => {
       document.querySelector("form button").setAttribute("disabled", "true");
       showNotification("Succesfully added new crew member");
+
+      onFilterClick();
     })
     .catch((err) => {
       showNotification(err);
